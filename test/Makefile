@@ -1,5 +1,5 @@
 #################################################################################################
-#  Build script for xtests
+#  Build script for unit tests
 #################################################################################################
 
 NVCC = "$(shell which nvcc)"
@@ -56,6 +56,8 @@ DEPS =
 
 all:
 	make main
+	make devicetest
+	make hosttest
 
 #------------------------------------------------------------------------------------------------
 #  make clean
@@ -74,4 +76,24 @@ main: bin/main
 bin/main : main.cu $(DEPS)
 	mkdir -p bin
 	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/main main.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
+
+#------------------------------------------------------------------------------------------------
+#  make devicetest
+#------------------------------------------------------------------------------------------------
+
+devicetest: bin/devicetest
+
+bin/devicetest : devicetest.cu $(DEPS)
+	mkdir -p bin
+	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/devicetest devicetest.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
+
+#------------------------------------------------------------------------------------------------
+#  make hosttest
+#------------------------------------------------------------------------------------------------
+
+hosttest: bin/hosttest
+
+bin/hosttest : hosttest.cu $(DEPS)
+	mkdir -p bin
+	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/hosttest hosttest.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
 

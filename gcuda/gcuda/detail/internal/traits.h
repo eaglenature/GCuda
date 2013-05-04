@@ -92,4 +92,5 @@ struct int2Type
 } // namespace internal
 } // namespace gcuda
 
+
 #endif /* GCUDA_DETAIL_INTERNAL_TRAITS_H_ */

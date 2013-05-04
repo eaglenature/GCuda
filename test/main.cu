@@ -10,6 +10,7 @@
 #include <gcuda/gcuda.h>
 
 #include <thrust/host_vector.h>
+//#include <thrust/device_vector.h>
 
 TEST(STLVector, AssertTest0)
 {
@@ -21,6 +22,7 @@ TEST(STLVector, AssertTest0)
         a[i] = i;
         b[i] = i;
     }
+    a[9] = 1;
     ASSERT_HOST_VECTOR_EQ(a, b);
 }
 
@@ -84,14 +86,14 @@ TEST(RawArray, AssertTest0)
 TEST(RawArray, ExpectTest1)
 {
     const int numElements = 10;
-    int* a = new int[numElements];
-    int* b = new int[numElements];
+    float* a = new float[numElements];
+    float* b = new float[numElements];
     for (int i = 0; i < numElements; ++i)
     {
         a[i] = i;
-        b[i] = i;
+        b[i] = i + 0.001f;
     }
-    EXPECT_HOST_ARRAY_EQ(a, b, numElements);
+    EXPECT_HOST_ARRAY_NEAR(a, b, numElements, 0.002);
     delete [] a;
     delete [] b;
 }
