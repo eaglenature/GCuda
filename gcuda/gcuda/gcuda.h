@@ -13,32 +13,38 @@
 #include <gcuda/detail/gcuda.h>
 
 
+
+/**
+ * Assertions
+ */
 #define ASSERT_HOST_VECTOR_EQ(expected, actual) \
     gcuda::assertHostVectorEq((expected), (actual), __FILE__, __LINE__)
 
 #define ASSERT_HOST_ARRAY_EQ(expected, actual, size) \
     gcuda::assertHostArrayEq((expected), (actual), (size), __FILE__, __LINE__)
 
+#define ASSERT_HOST_VECTOR_NEAR(expected, actual, abs_error) \
+    gcuda::assertHostVectorNear((expected), (actual), (abs_error), __FILE__, __LINE__)
 
+#define ASSERT_HOST_ARRAY_NEAR(expected, actual, size, abs_error) \
+    gcuda::assertHostArrayNear((expected), (actual), (size), (abs_error), __FILE__, __LINE__)
+
+
+/**
+ * Expectations
+ */
 #define EXPECT_HOST_VECTOR_EQ(expected, actual) \
     gcuda::expectHostVectorEq((expected), (actual), __FILE__, __LINE__)
 
 #define EXPECT_HOST_ARRAY_EQ(expected, actual, size) \
     gcuda::expectHostArrayEq((expected), (actual), (size), __FILE__, __LINE__)
 
+#define EXPECT_HOST_VECTOR_NEAR(expected, actual, abs_error) \
+    gcuda::expectHostVectorNear((expected), (actual), (abs_error), __FILE__, __LINE__)
 
+#define EXPECT_HOST_ARRAY_NEAR(expected, actual, size, abs_error) \
+    gcuda::expectHostArrayNear((expected), (actual), (size), (abs_error), __FILE__, __LINE__)
 
-
-//#define ASSERT_DEVICE_ARRAY_EQ(expected, actual)
-//
-//
-//#define EXPECT_DEVICE_ARRAY_EQ(expected, actual)
-//
-//
-//#define ASSERT_HOST_DEVICE_ARRAY_EQ(expected, actual)
-//
-//
-//#define EXPECT_HOST_DEVICE_ARRAY_EQ(expected, actual)
 
 
 #endif /* GCUDA_H_ */

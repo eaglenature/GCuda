@@ -56,7 +56,7 @@ struct isIntegralType<unsigned long>
 
 
 /**
- * If T is floating-point type (float, double)
+ * If T is single floating-point type (float)
  * provide member constant value equal true. For any other type value is false.
  */
 template <typename T>
@@ -66,10 +66,6 @@ struct isFloatingPointType
 template <>
 struct isFloatingPointType<float>
 { static const bool value = true; };
-
-//template <>
-//struct isFloatingPointType<double>
-//{ static const bool value = true; };
 
 
 /**

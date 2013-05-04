@@ -14,14 +14,13 @@
 TEST(STLVector, AssertTest0)
 {
     const int numElements = 10;
-    std::vector<int> a(numElements);
-    std::vector<int> b(numElements);
+    std::vector<double> a(numElements);
+    std::vector<double> b(numElements);
     for (int i = 0; i < numElements; ++i)
     {
         a[i] = i;
         b[i] = i;
     }
-    //b[7] = 4;
     ASSERT_HOST_VECTOR_EQ(a, b);
 }
 
@@ -35,8 +34,6 @@ TEST(STLVector, ExpectTest0)
         a[i] = i;
         b[i] = i;
     }
-    //b[7] = 4;
-    //b[9] = 11;
     EXPECT_HOST_VECTOR_EQ(a, b);
 }
 
@@ -44,14 +41,13 @@ TEST(STLVector, ExpectTest0)
 TEST(HostVector, AssertThrustHostVector0)
 {
     const int numElements = 10;
-    thrust::host_vector<int> a(numElements);
-    thrust::host_vector<int> b(numElements);
+    thrust::host_vector<double> a(numElements);
+    thrust::host_vector<double> b(numElements);
     for (int i = 0; i < numElements; ++i)
     {
         a[i] = i;
         b[i] = i;
     }
-    //b[7] = 4;
     ASSERT_HOST_VECTOR_EQ(a, b);
 }
 
@@ -65,8 +61,6 @@ TEST(HostVector, ExpectThrustHostVector0)
         a[i] = i;
         b[i] = i;
     }
-    //b[7] = 4;
-    //b[9] = 11;
     EXPECT_HOST_VECTOR_EQ(a, b);
 }
 
@@ -74,17 +68,14 @@ TEST(HostVector, ExpectThrustHostVector0)
 TEST(RawArray, AssertTest0)
 {
     const int numElements = 10;
-    int* a = new int[numElements];
-    int* b = new int[numElements];
+    double* a = new double[numElements];
+    double* b = new double[numElements];
     for (int i = 0; i < numElements; ++i)
     {
         a[i] = i;
         b[i] = i;
     }
-    //b[7] = 4;
-    //b[9] = 11;
     ASSERT_HOST_ARRAY_EQ(a, b, numElements);
-
     delete [] a;
     delete [] b;
 }
@@ -100,10 +91,7 @@ TEST(RawArray, ExpectTest1)
         a[i] = i;
         b[i] = i;
     }
-    //b[7] = 4;
-    //b[9] = 11;
     EXPECT_HOST_ARRAY_EQ(a, b, numElements);
-
     delete [] a;
     delete [] b;
 }
