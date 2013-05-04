@@ -4,6 +4,18 @@
 #include <thrust/device_vector.h>
 #include <thrust/sort.h>
 
+
+template <typename T>
+__global__ void incrementKernel(T* data, int size)
+{
+    int tid = blockDim.x * blockIdx.x + threadIdx.x;
+    if (tid < size)
+    {
+        int d = data[tid];
+        data[tid] = d + 1;
+    }
+}
+
 TEST(DeviceVector, ThrustVectors)
 {
     typedef int T;
@@ -14,10 +26,8 @@ TEST(DeviceVector, ThrustVectors)
         a[i] = i;
     }
     thrust::device_vector<T> b = a;
-
     thrust::sort(a.begin(), a.end());
     thrust::sort(b.begin(), b.end());
-
     ASSERT_DEVICE_VECTOR_EQ(a, b);
 }
 TEST(DeviceVector, ThrustVectorsNear)
@@ -30,26 +40,10 @@ TEST(DeviceVector, ThrustVectorsNear)
         a[i] = i;
     }
     thrust::device_vector<T> b = a;
-
     thrust::sort(a.begin(), a.end());
     thrust::sort(b.begin(), b.end());
-
     a[5] += 0.001f;
-
     ASSERT_DEVICE_VECTOR_NEAR(a, b, 0.002);
-}
-
-
-
-template <typename T>
-__global__ void incrementKernel(T* data, int size)
-{
-    int tid = blockDim.x * blockIdx.x + threadIdx.x;
-    if (tid < size)
-    {
-        int d = data[tid];
-        data[tid] = d + 1;
-    }
 }
 TEST(DeviceVector, HostVectorVsDeviceRawPointer)
 {
@@ -62,11 +56,9 @@ TEST(DeviceVector, HostVectorVsDeviceRawPointer)
         a[i] = i;
         ref[i] = i + 1;
     }
-
     T* b;
     cudaMalloc((void**)&b, sizeof(int) * numElements);
     cudaMemcpy(b, a.data(), sizeof(int) * numElements, cudaMemcpyHostToDevice);
-
     int threads = 128;
     int blocks = (numElements + threads - 1)/threads;
     incrementKernel<T><<<blocks, threads>>>(b, numElements);
@@ -84,11 +76,9 @@ TEST(DeviceVector, HostRawVsDeviceRawPointer)
         a[i] = i;
         ref[i] = i + 1;
     }
-
     T* b;
     cudaMalloc((void**)&b, sizeof(int) * numElements);
     cudaMemcpy(b, a.data(), sizeof(int) * numElements, cudaMemcpyHostToDevice);
-
     int threads = 128;
     int blocks = (numElements + threads - 1)/threads;
     incrementKernel<T><<<blocks, threads>>>(b, numElements);

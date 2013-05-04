@@ -8,7 +8,7 @@
 #ifndef DETAIL_INTERNAL_GCUDA_H_
 #define DETAIL_INTERNAL_GCUDA_H_
 
-#include <gmock/gmock.h>
+
 #include <gtest/gtest.h>
 #include <gcuda/detail/internal/traits.h>
 
@@ -17,8 +17,9 @@
 #ifndef GCUDA_INFO
 #define GCUDA_INFO(index, file, line) \
     "At index: " << (index) << "\n" << (file) << ":" << (line) << '\n'
-#endif // GCUDA_INFO
-
+#else
+#error GCUDA_INFO redefinition
+#endif
 
 
 namespace gcuda
