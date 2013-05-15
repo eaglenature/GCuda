@@ -12,6 +12,8 @@
 #include <gtest/gtest.h>
 #include <gcuda/detail/internal/traits.h>
 
+//#include <boost/type_traits/is_floating_point.hpp>
+//#include <boost/type_traits/is_integral.hpp>
 
 
 #ifndef GCUDA_MESSAGE

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <thrust/host_vector.h>
+#include <thrust/transform.h>
 
 TEST(STLVector, AssertTestChar)
 {
