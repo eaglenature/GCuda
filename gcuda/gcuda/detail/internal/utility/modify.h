@@ -21,20 +21,28 @@ namespace detail
 template <class ComponentTag>
 std::ostream& modify(std::ostream& os)
 {
+    os << std::right
+       << std::setw(10);
     return os;
 }
 
 template <>
 std::ostream& modify<single_prec_float_component_tag>(std::ostream& os)
 {
-    os << std::setprecision(std::numeric_limits<float>::digits10 + 2);
+    os << std::setprecision(std::numeric_limits<float>::digits10 + 2)
+       << std::right
+       << std::setw(16)
+       << std::showpoint;
     return os;
 }
 
 template <>
 std::ostream& modify<double_prec_float_component_tag>(std::ostream& os)
 {
-    os << std::setprecision(std::numeric_limits<double>::digits10 + 2);
+    os << std::setprecision(std::numeric_limits<double>::digits10 + 2)
+       << std::right
+       << std::setw(16)
+       << std::showpoint;
     return os;
 }
 

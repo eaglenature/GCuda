@@ -44,7 +44,8 @@ std::string formatImpl(const RawType& v, dimension2)
 {
     typedef typename vector_component<RawType>::type ComponentTag;
     std::stringstream ss;
-    ss << modify<ComponentTag> << v.x << " " << v.y;
+    ss << modify<ComponentTag> << v.x << ", "
+       << modify<ComponentTag> << v.y;
     return ss.str();
 }
 
@@ -53,7 +54,9 @@ std::string formatImpl(const RawType& v, dimension3)
 {
     typedef typename vector_component<RawType>::type ComponentTag;
     std::stringstream ss;
-    ss << modify<ComponentTag> << v.x << " " << v.y << " " << v.z;
+    ss << modify<ComponentTag> << v.x << ", "
+       << modify<ComponentTag> << v.y << ", "
+       << modify<ComponentTag> << v.z;
     return ss.str();
 }
 
@@ -62,7 +65,10 @@ std::string formatImpl(const RawType& v, dimension4)
 {
     typedef typename vector_component<RawType>::type ComponentTag;
     std::stringstream ss;
-    ss << modify<ComponentTag> << v.x << " " << v.y << " " << v.z << " " << v.w;
+    ss << modify<ComponentTag> << v.x << ", "
+       << modify<ComponentTag> << v.y << ", "
+       << modify<ComponentTag> << v.z << ", "
+       << modify<ComponentTag> << v.w;
     return ss.str();
 }
 

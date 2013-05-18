@@ -45,7 +45,7 @@ TEST(HostArrayEqual, Float3)
         a[i] = make_float3(i * 3.14f, (-i) * 3.14f, 0.01234f);
         b[i] = make_float3(i * 3.14f, (-i) * 3.14f, 0.01234f);
     }
-    //b[2] = make_float3(131.31f, 123123.03f, 0.01235f);
+    //b[2] = make_float3(131, 555123123.03f, 0.01235f);
     ASSERT_HOST_ARRAY_EQ(a.data(), b.data(), numElements);
 }
 
@@ -57,8 +57,8 @@ TEST(HostArrayEqual, Double4)
     std::vector<T> b(numElements);
     for (int i = 0; i < numElements; ++i)
     {
-        a[i] = make_double4(i * 3.1412312, (-i) * 0.0314, 0.01234f, 0.000012);
-        b[i] = make_double4(i * 3.1412312, (-i) * 0.0314, 0.01234f,  0.000012);
+        a[i] = make_double4(i * 3.1412312, (-i) * 0.0314, 0.01234, 0.000012);
+        b[i] = make_double4(i * 3.1412312, (-i) * 0.0314, 0.01234,  0.000012);
     }
     //b[2] = make_double4(131, 123123, 0.01235f, -123.12345);
     ASSERT_HOST_ARRAY_EQ(a.data(), b.data(), numElements);

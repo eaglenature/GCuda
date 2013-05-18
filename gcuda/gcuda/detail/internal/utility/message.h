@@ -20,22 +20,22 @@ struct message
     const char*  expr1;
     const char*  expr2;
     const size_t index;
-    const T*     expected;
+    const T*     expect;
     const T*     actual;
-    message(const char* expr1, const char* expr2, size_t index, const T* expected, const T* actual)
-        : expr1(expr1), expr2(expr2), index(index), expected(expected), actual(actual)
+    message(const char* expr1, const char* expr2, size_t index, const T* expect, const T* actual)
+        : expr1(expr1), expr2(expr2), index(index), expect(expect), actual(actual)
     {};
 };
 
 template <class T>
 std::ostream& operator<<(std::ostream& os, const message<T>& msg)
 {
-    os << msg.expr1 << " and " << msg.expr2
-       << " Element: "   << msg.index
-       << "\nExpected: " << detail::format(msg.expected[msg.index])
-       << "\nActual:   " << detail::format(msg.actual[msg.index]);
+    os << "Compare " << msg.expr1 << " and " << msg.expr2
+       << "\nIndex :   [" << msg.index << "]"
+       << "\nExpect:   [" << detail::format(msg.expect[msg.index]) << " ]"
+       << "\nActual:   [" << detail::format(msg.actual[msg.index]) << " ]";
     return os;
-} //TODO Format vector element output
+}
 
 } // namespace detail
 } // namespace gcuda
