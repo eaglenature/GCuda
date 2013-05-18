@@ -4,6 +4,38 @@
 #include <thrust/host_vector.h>
 #include <thrust/transform.h>
 
+
+TEST(NewVector, AssertTestChar)
+{
+    {
+        typedef int T;
+        const int numElements = 10;
+        std::vector<T> a(numElements);
+        std::vector<T> b(numElements);
+        for (int i = 0; i < numElements; ++i)
+        {
+            a[i] = i;
+            b[i] = i;
+        }
+        //b[5] = 1;
+        //ASSERT_VECTOR(a, b);
+    }
+    {
+        typedef unsigned short T;
+        const int numElements = 10;
+        std::vector<T> a(numElements);
+        std::vector<T> b(numElements);
+        for (int i = 0; i < numElements; ++i)
+        {
+            a[i] = i;
+            b[i] = i;
+        }
+        b[9] = 17;
+        ASSERT_VECTOR(a, b);
+        EXPECT_EQ()
+    }
+}
+
 TEST(STLVector, AssertTestChar)
 {
     {
@@ -264,8 +296,9 @@ TEST(ThrustVector, AssertTestInt2)
             a[i] = make_int2(i, i);
             b[i] = make_int2(i, i);
         }
-        //b[5] = make_int2(3, 8);
-        ASSERT_HOST_VECTOR_EQ(a, b);
+        b[5] = make_int2(3, 8);
+        //ASSERT_HOST_VECTOR_EQ(a, b);
+        ASSERT_VECTOR(a, b);
     }
     {
         typedef uint2 T;
@@ -376,8 +409,9 @@ TEST(ThrustVector, AssertTestFloat4)
             a[i] = make_float4(i, i, i, i);
             b[i] = make_float4(i, i, i, i);;
         }
-        //b[5] = make_float4(5.0f, 5.0f, 1.43f, 5.0f);
-        ASSERT_HOST_VECTOR_EQ(a, b);
+        b[5] = make_float4(5.0f, 5.0f, 1.43f, 5.0f);
+        ASSERT_VECTOR(a, b);
+        //ASSERT_HOST_VECTOR_EQ(a, b);
     }
 }
 

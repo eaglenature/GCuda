@@ -8,292 +8,133 @@
 #ifndef DETAIL_GCUDA_H_
 #define DETAIL_GCUDA_H_
 
-
-#include <gcuda/detail/internal/gcuda.h>
+#include <gcuda/detail/internal/assert_device.h>
+#include <gcuda/detail/internal/assert_host.h>
 
 
 namespace gcuda
 {
 
+template <class HostVector>
+::testing::AssertionResult assertHostVectorEq(
+        const char*       expected_expr,
+        const char*       actual_expr,
+        const HostVector& expected,
+        const HostVector& actual)
+{
+    return detail::assertHostVectorEq(expected_expr, actual_expr, expected, actual);
+}
 
-template <typename HostVector>
-void assertHostVectorEq(
+template <class T>
+::testing::AssertionResult assertHostArrayEq(
+        const char*  expected_expr,
+        const char*  actual_expr,
+        const char*  size_expr,
+        const T*     expected,
+        const T*     actual,
+        const size_t size)
+{
+    return detail::assertHostArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
+}
+
+template <class HostVector>
+::testing::AssertionResult assertHostVectorNear(
+        const char*       expected_expr,
+        const char*       actual_expr,
         const HostVector& expected,
         const HostVector& actual,
-        const char* const file,
-        const int line)
+        const double      abs_error)
 {
-    internal::assertArrayEq(expected.data(), actual.data(), actual.size(), file, line);
+    return detail::assertHostVectorNear(expected_expr, actual_expr, expected, actual, abs_error);
 }
 
+template <class T>
+::testing::AssertionResult assertHostArrayNear(
+        const char*  expected_expr,
+        const char*  actual_expr,
+        const char*  size_expr,
+        const T*     expected,
+        const T*     actual,
+        const size_t size,
+        const double abs_error)
+{
+    return detail::assertHostArrayNear(expected_expr, actual_expr, size_expr, expected, actual, size, abs_error);
+}
 
+template <class HostVector,
+          class DeviceVector>
+::testing::AssertionResult assertDeviceVectorEq(
+        const char*         expected_expr,
+        const char*         actual_expr,
+        const HostVector&   expected,
+        const DeviceVector& actual)
+{
+    return detail::assertDeviceVectorEq(expected_expr, actual_expr, expected, actual);
+}
 
-template <typename HostVector>
-void assertHostVectorNear(
+template <class HostVector>
+::testing::AssertionResult assertDeviceArrayEq(
+        const char*       expected_expr,
+        const char*       actual_expr,
+        const char*       size_expr,
+        const HostVector& expected,
+        const typename HostVector::value_type* actual,
+        const size_t      size)
+{
+    return detail::assertDeviceArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
+}
+
+template <class T>
+::testing::AssertionResult assertDeviceArrayEq(
+        const char*  expected_expr,
+        const char*  actual_expr,
+        const char*  size_expr,
+        const T*     expected,
+        const T*     actual,
+        const size_t size)
+{
+    return detail::assertDeviceArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
+}
+
+template <class HostVector,
+          class DeviceVector>
+::testing::AssertionResult assertDeviceVectorNear(
+        const char*       expected_expr,
+        const char*       actual_expr,
+        const char*       abs_error_expr,
         const HostVector& expected,
         const HostVector& actual,
-        const double abs_error,
-        const char* const file,
-        const int line)
+        const double      abs_error)
 {
-    internal::assertArrayNear(expected.data(), actual.data(), actual.size(), abs_error, file, line);
+    return detail::assertDeviceVectorNear(expected_expr, actual_expr, abs_error_expr, expected, actual, abs_error);
 }
 
-
-
-template <typename T>
-void assertHostArrayEq(
-        const T*  expected,
-        const T*  actual,
-        const int size,
-        const char* const file,
-        const int line)
-{
-    internal::assertArrayEq(expected, actual, size, file, line);
-}
-
-
-
-template <typename T>
-void assertHostArrayNear(
-        const T*  expected,
-        const T*  actual,
-        const int size,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    internal::assertArrayNear(expected, actual, size, abs_error, file, line);
-}
-
-
-template <typename HostVector>
-void expectHostVectorEq(
-        const HostVector& expected,
-        const HostVector& actual,
-        const char* const file,
-        const int line)
-{
-    internal::expectArrayEq(expected.data(), actual.data(), actual.size(), file, line);
-}
-
-
-template <typename HostVector>
-void expectHostVectorNear(
-        const HostVector& expected,
-        const HostVector& actual,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    internal::expectArrayNear(expected.data(), actual.data(), actual.size(), abs_error, file, line);
-}
-
-
-template <typename T>
-void expectHostArrayEq(
-        const T*  expected,
-        const T*  actual,
-        const int size,
-        const char* const file,
-        const int line)
-{
-    internal::expectArrayEq(expected, actual, size, file, line);
-}
-
-
-template <typename T>
-void expectHostArrayNear(
-        const T*  expected,
-        const T*  actual,
-        const int size,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    internal::expectArrayNear(expected, actual, size, abs_error, file, line);
-}
-
-
-template <typename HostVector,
-          typename DeviceVector>
-void assertDeviceVectorEq(
-        const HostVector& expected,
-        const DeviceVector& actual,
-        const char* const file,
-        const int line)
-{
-    HostVector actualCopy = actual;
-    internal::assertArrayEq(expected.data(), actualCopy.data(), actualCopy.size(), file, line);
-}
-
-
-template <typename HostVector>
-void assertDeviceArrayEq(
+template <class HostVector>
+::testing::AssertionResult assertDeviceArrayNear(
+        const char*       expected_expr,
+        const char*       actual_expr,
+        const char*       size_expr,
+        const char*       abs_error_expr,
         const HostVector& expected,
         const typename HostVector::value_type* actual,
-        const int size,
-        const char* const file,
-        const int line)
+        const size_t      size,
+        const double      abs_error)
 {
-    typedef typename HostVector::value_type T;
-    HostVector actualCopy(size);
-    ASSERT_EQ(cudaMemcpy(actualCopy.data(), actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::assertArrayEq(expected.data(), actualCopy.data(), actualCopy.size(), file, line);
+    return detail::assertDeviceArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
 }
 
-
-template <typename T>
-void assertDeviceArrayEq(
-        const T* expected,
-        const T* actual,
-        const int size,
-        const char* const file,
-        const int line)
+template <class T>
+::testing::AssertionResult assertDeviceArrayNear(
+        const char*  expected_expr,
+        const char*  actual_expr,
+        const char*  size_expr,
+        const char*  abs_error_expr,
+        const T*     expected,
+        const T*     actual,
+        const size_t size,
+        const double abs_error)
 {
-    T* const actualCopy = new T[size];
-    ASSERT_TRUE(actualCopy != NULL);
-    ASSERT_EQ(cudaMemcpy(actualCopy, actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::assertArrayEq(expected, actualCopy, size, file, line);
-    delete [] actualCopy;
-}
-
-
-template <typename HostVector,
-          typename DeviceVector>
-void assertDeviceVectorNear(
-        const HostVector& expected,
-        const DeviceVector& actual,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    HostVector actualCopy = actual;
-    internal::assertArrayNear(expected.data(), actualCopy.data(), actualCopy.size(), abs_error, file, line);
-}
-
-
-template <typename HostVector>
-void assertDeviceArrayNear(
-        const HostVector& expected,
-        const typename HostVector::value_type* actual,
-        const int size,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    typedef typename HostVector::value_type T;
-    HostVector actualCopy(size);
-    ASSERT_EQ(cudaMemcpy(actualCopy.data(), actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::assertArrayNear(expected.data(), actualCopy.data(), actualCopy.size(), abs_error, file, line);
-}
-
-
-template <typename T>
-void assertDeviceArrayNear(
-        const T* expected,
-        const T* actual,
-        const int size,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    T* const actualCopy = new T[size];
-    ASSERT_TRUE(actualCopy != NULL);
-    ASSERT_EQ(cudaMemcpy(actualCopy, actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::assertArrayNear(expected, actualCopy, size, abs_error, file, line);
-    delete [] actualCopy;
-}
-
-
-template <typename HostVector,
-          typename DeviceVector>
-void expectDeviceVectorEq(
-        const HostVector& expected,
-        const DeviceVector& actual,
-        const char* const file,
-        const int line)
-{
-    HostVector actualCopy = actual;
-    internal::expectArrayEq(expected.data(), actualCopy.data(), actualCopy.size(), file, line);
-}
-
-
-template <typename HostVector>
-void expectDeviceArrayEq(
-        const HostVector& expected,
-        const typename HostVector::value_type* actual,
-        const int size,
-        const char* const file,
-        const int line)
-{
-    typedef typename HostVector::value_type T;
-    HostVector actualCopy(size);
-    ASSERT_EQ(cudaMemcpy(actualCopy.data(), actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::expectArrayEq(expected.data(), actualCopy.data(), actualCopy.size(), file, line);
-}
-
-
-template <typename T>
-void expectDeviceArrayEq(
-        const T* expected,
-        const T* actual,
-        const int size,
-        const char* const file,
-        const int line)
-{
-    T* const actualCopy = new T[size];
-    ASSERT_TRUE(actualCopy != NULL);
-    ASSERT_EQ(cudaMemcpy(actualCopy, actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::expectArrayEq(expected, actualCopy, size, file, line);
-    delete [] actualCopy;
-}
-
-
-template <typename HostVector,
-          typename DeviceVector>
-void expectDeviceVectorNear(
-        const HostVector& expected,
-        const DeviceVector& actual,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    HostVector actualCopy = actual;
-    internal::expectArrayNear(expected.data(), actualCopy.data(), actualCopy.size(), abs_error, file, line);
-}
-
-
-template <typename HostVector>
-void expectDeviceArrayNear(
-        const HostVector& expected,
-        const typename HostVector::value_type* actual,
-        const int size,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    typedef typename HostVector::value_type T;
-    HostVector actualCopy(size);
-    ASSERT_EQ(cudaMemcpy(actualCopy.data(), actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::expectArrayNear(expected.data(), actualCopy.data(), actualCopy.size(), abs_error, file, line);
-}
-
-
-template <typename T>
-void expectDeviceArrayNear(
-        const T* expected,
-        const T* actual,
-        const int size,
-        const double abs_error,
-        const char* const file,
-        const int line)
-{
-    T* const actualCopy = new T[size];
-    ASSERT_TRUE(actualCopy != NULL);
-    ASSERT_EQ(cudaMemcpy(actualCopy, actual, sizeof(T) * size, cudaMemcpyDeviceToHost), cudaSuccess);
-    internal::expectArrayNear(expected, actualCopy, size, abs_error, file, line);
-    delete [] actualCopy;
+    return detail::assertDeviceArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
 }
 
 } // namespace gcuda

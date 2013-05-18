@@ -1,12 +1,12 @@
 /*
- * <gcuda/detail/internal/gcuda.h>
+ * <gcuda/detail/internal/assert.h>
  *
- *  Created on: May 4, 2013
+ *  Created on: May , 2013
  *      Author: eaglenature@gmail.com
  */
 
-#ifndef DETAIL_INTERNAL_GCUDA_H_
-#define DETAIL_INTERNAL_GCUDA_H_
+#ifndef DETAIL_INTERNAL_ASSERT_H_
+#define DETAIL_INTERNAL_ASSERT_H_
 
 #include <gtest/gtest.h>
 #include <gcuda/detail/internal/utility/compare.h>
@@ -55,4 +55,4 @@ std::pair<size_t, bool> assertArrayNear(
 } // namespace detail
 } // namespace gcuda
 
-#endif /* DETAIL_INTERNAL_GCUDA_H_ */
+#endif /* DETAIL_INTERNAL_ASSERT_H_ */

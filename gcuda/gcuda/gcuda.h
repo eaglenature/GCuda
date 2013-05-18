@@ -19,7 +19,6 @@
 
 namespace gcuda
 {
-
 /*!
  * Host side vector container assert.
  *
@@ -49,7 +48,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_HOST_VECTOR_EQ(expected, actual) \
-    gcuda::assertHostVectorEq((expected), (actual), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT2(gcuda::assertHostVectorEq, expected, actual)
 
 
 /*!
@@ -68,7 +67,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_HOST_ARRAY_EQ(expected, actual, size) \
-    gcuda::assertHostArrayEq((expected), (actual), (size), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT3(gcuda::assertHostArrayEq, expected, actual, size)
 
 
 /*!
@@ -90,7 +89,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_HOST_VECTOR_NEAR(expected, actual, abs_error) \
-    gcuda::assertHostVectorNear((expected), (actual), (abs_error), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT3(gcuda::assertHostVectorNear, expected, actual, abs_error)
 
 
 /*!
@@ -110,7 +109,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_HOST_ARRAY_NEAR(expected, actual, size, abs_error) \
-    gcuda::assertHostArrayNear((expected), (actual), (size), (abs_error), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT4(gcuda::assertHostArrayNear, expected, actual, size, abs_error)
 
 
 /*!
@@ -132,7 +131,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_DEVICE_VECTOR_EQ(expected, actual) \
-    gcuda::assertDeviceVectorEq((expected), (actual), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT2(gcuda::assertDeviceVectorEq, expected, actual)
 
 
 /*!
@@ -164,7 +163,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_DEVICE_ARRAY_EQ(expected, actual, size) \
-    gcuda::assertDeviceArrayEq((expected), (actual), (size), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT3(gcuda::assertDeviceArrayEq, expected, actual, size)
 
 
 /*!
@@ -186,7 +185,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_DEVICE_VECTOR_NEAR(expected, actual, abs_error) \
-    gcuda::assertDeviceVectorNear((expected), (actual), (abs_error), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT3(gcuda::assertDeviceVectorNear, expected, actual, abs_error)
 
 
 /*!
@@ -218,7 +217,7 @@ namespace gcuda
  * \endcode
  */
 #define ASSERT_DEVICE_ARRAY_NEAR(expected, actual, size, abs_error) \
-    gcuda::assertDeviceArrayNear((expected), (actual), (size), (abs_error), __FILE__, __LINE__)
+    ASSERT_PRED_FORMAT4(gcuda::assertDeviceArrayNear, expected, actual, size, abs_error)
 
 
 
@@ -226,30 +225,35 @@ namespace gcuda
  * Expect does not hold test. Examples like in ASSERTS (TODO)
  */
 #define EXPECT_HOST_VECTOR_EQ(expected, actual) \
-    gcuda::expectHostVectorEq((expected), (actual), __FILE__, __LINE__)
+    EXPECT_PRED_FORMAT2(gcuda::assertHostVectorEq, expected, actual)
+
 
 #define EXPECT_HOST_ARRAY_EQ(expected, actual, size) \
-    gcuda::expectHostArrayEq((expected), (actual), (size), __FILE__, __LINE__)
+    EXPECT_PRED_FORMAT3(gcuda::assertHostArrayEq, expected, actual, size)
+
 
 #define EXPECT_HOST_VECTOR_NEAR(expected, actual, abs_error) \
-    gcuda::expectHostVectorNear((expected), (actual), (abs_error), __FILE__, __LINE__)
+    EXPECT_PRED_FORMAT3(gcuda::assertHostVectorNear, expected, actual, abs_error)
+
 
 #define EXPECT_HOST_ARRAY_NEAR(expected, actual, size, abs_error) \
-    gcuda::expectHostArrayNear((expected), (actual), (size), (abs_error), __FILE__, __LINE__)
-
+    EXPECT_PRED_FORMAT4(gcuda::assertHostArrayNear, expected, actual, size, abs_error)
 
 
 #define EXPECT_DEVICE_VECTOR_EQ(expected, actual) \
-    gcuda::expectDeviceVectorEq((expected), (actual), __FILE__, __LINE__)
+    EXPECT_PRED_FORMAT2(gcuda::assertDeviceVectorEq, expected, actual)
+
 
 #define EXPECT_DEVICE_ARRAY_EQ(expected, actual, size) \
-    gcuda::expectDeviceArrayEq((expected), (actual), (size), __FILE__, __LINE__)
+    EXPECT_PRED_FORMAT3(gcuda::assertDeviceArrayEq, expected, actual, size)
+
 
 #define EXPECT_DEVICE_VECTOR_NEAR(expected, actual, abs_error) \
-    gcuda::expectDeviceVectorNear((expected), (actual), (abs_error), __FILE__, __LINE__)
+    EXPECT_PRED_FORMAT3(gcuda::assertDeviceVectorNear, expected, actual, abs_error)
+
 
 #define EXPECT_DEVICE_ARRAY_NEAR(expected, actual, size, abs_error) \
-    gcuda::expectDeviceArrayNear((expected), (actual), (size), (abs_error), __FILE__, __LINE__)
+    EXPECT_PRED_FORMAT4(gcuda::assertDeviceArrayNear, expected, actual, size, abs_error)
 
 
 
