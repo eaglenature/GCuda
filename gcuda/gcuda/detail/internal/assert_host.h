@@ -29,6 +29,7 @@ template <class HostVector>
         const HostVector& expected,
         const HostVector& actual)
 {
+    typedef typename HostVector::value_type RawType;
     typedef std::pair<size_t, bool> ResultPair;
 
     const ResultPair resultPair = detail::assertArrayEq(expected.data(), actual.data(), actual.size());
@@ -36,7 +37,7 @@ template <class HostVector>
     {
         return ::testing::AssertionSuccess();
     }
-    return ::testing::AssertionFailure() << detail::message(expected_expr, actual_expr, resultPair.first, expected, actual);
+    return ::testing::AssertionFailure() << detail::message<RawType>(expected_expr, actual_expr, resultPair.first, expected.data(), actual.data());
 }
 
 
@@ -45,19 +46,19 @@ template <class T>
 ::testing::AssertionResult assertHostArrayEq(
         const char*  expected_expr,
         const char*  actual_expr,
-        const char*  size_expr,
+        const char*  count_expr,
         const T*     expected,
         const T*     actual,
-        const size_t size)
+        const size_t count)
 {
     typedef std::pair<size_t, bool> ResultPair;
 
-    const ResultPair resultPair = detail::assertArrayEq(expected, actual, size);
+    const ResultPair resultPair = detail::assertArrayEq(expected, actual, count);
     if (resultPair.second)
     {
         return ::testing::AssertionSuccess();
     }
-    return ::testing::AssertionFailure() << detail::message(expected_expr, actual_expr, resultPair.first, expected, actual);
+    return ::testing::AssertionFailure() << detail::message<T>(expected_expr, actual_expr, resultPair.first, expected, actual);
 }
 
 
@@ -71,6 +72,7 @@ template <class HostVector>
         const HostVector& actual,
         const double      abs_error)
 {
+    typedef typename HostVector::value_type RawType;
     typedef std::pair<size_t, bool> ResultPair;
 
     const ResultPair resultPair = detail::assertArrayNear(expected.data(), actual.data(), actual.size(), abs_error);
@@ -78,7 +80,7 @@ template <class HostVector>
     {
         return ::testing::AssertionSuccess();
     }
-    return ::testing::AssertionFailure() << detail::message(expected_expr, actual_expr, resultPair.first, expected, actual);
+    return ::testing::AssertionFailure() << detail::message<RawType>(expected_expr, actual_expr, resultPair.first, expected.data(), actual.data());
 }
 
 
@@ -87,21 +89,21 @@ template <class T>
 ::testing::AssertionResult assertHostArrayNear(
         const char*  expected_expr,
         const char*  actual_expr,
-        const char*  size_expr,
+        const char*  count_expr,
         const char*  abs_error_expr,
         const T*     expected,
         const T*     actual,
-        const size_t size,
+        const size_t count,
         const double abs_error)
 {
     typedef std::pair<size_t, bool> ResultPair;
 
-    const ResultPair resultPair = detail::assertArrayNear(expected, actual, size, abs_error);
+    const ResultPair resultPair = detail::assertArrayNear(expected, actual, count, abs_error);
     if (resultPair.second)
     {
         return ::testing::AssertionSuccess();
     }
-    return ::testing::AssertionFailure() << detail::message(expected_expr, actual_expr, resultPair.first, expected, actual);
+    return ::testing::AssertionFailure() << detail::message<T>(expected_expr, actual_expr, resultPair.first, expected, actual);
 }
 
 } // namespace detail

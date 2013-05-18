@@ -31,12 +31,12 @@ template <class T>
 ::testing::AssertionResult assertHostArrayEq(
         const char*  expected_expr,
         const char*  actual_expr,
-        const char*  size_expr,
+        const char*  count_expr,
         const T*     expected,
         const T*     actual,
-        const size_t size)
+        const size_t count)
 {
-    return detail::assertHostArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
+    return detail::assertHostArrayEq(expected_expr, actual_expr, count_expr, expected, actual, count);
 }
 
 
@@ -59,14 +59,14 @@ template <class T>
 ::testing::AssertionResult assertHostArrayNear(
         const char*  expected_expr,
         const char*  actual_expr,
-        const char*  size_expr,
+        const char*  count_expr,
         const char*  abs_error_expr,
         const T*     expected,
         const T*     actual,
-        const size_t size,
+        const size_t count,
         const double abs_error)
 {
-    return detail::assertHostArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
+    return detail::assertHostArrayNear(expected_expr, actual_expr, count_expr, abs_error_expr, expected, actual, count, abs_error);
 }
 
 
@@ -88,12 +88,12 @@ template <class HostVector>
 ::testing::AssertionResult assertDeviceArrayEq(
         const char*       expected_expr,
         const char*       actual_expr,
-        const char*       size_expr,
+        const char*       count_expr,
         const HostVector& expected,
         const typename HostVector::value_type* actual,
-        const size_t      size)
+        const size_t      count)
 {
-    return detail::assertDeviceArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
+    return detail::assertDeviceArrayEq(expected_expr, actual_expr, count_expr, expected, actual, count);
 }
 
 
@@ -102,12 +102,12 @@ template <class T>
 ::testing::AssertionResult assertDeviceArrayEq(
         const char*  expected_expr,
         const char*  actual_expr,
-        const char*  size_expr,
+        const char*  count_expr,
         const T*     expected,
         const T*     actual,
-        const size_t size)
+        const size_t count)
 {
-    return detail::assertDeviceArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
+    return detail::assertDeviceArrayEq(expected_expr, actual_expr, count_expr, expected, actual, count);
 }
 
 
@@ -115,12 +115,12 @@ template <class T>
 template <class HostVector,
           class DeviceVector>
 ::testing::AssertionResult assertDeviceVectorNear(
-        const char*       expected_expr,
-        const char*       actual_expr,
-        const char*       abs_error_expr,
-        const HostVector& expected,
-        const HostVector& actual,
-        const double      abs_error)
+        const char*         expected_expr,
+        const char*         actual_expr,
+        const char*         abs_error_expr,
+        const HostVector&   expected,
+        const DeviceVector& actual,
+        const double        abs_error)
 {
     return detail::assertDeviceVectorNear(expected_expr, actual_expr, abs_error_expr, expected, actual, abs_error);
 }
@@ -131,14 +131,14 @@ template <class HostVector>
 ::testing::AssertionResult assertDeviceArrayNear(
         const char*       expected_expr,
         const char*       actual_expr,
-        const char*       size_expr,
+        const char*       count_expr,
         const char*       abs_error_expr,
         const HostVector& expected,
         const typename HostVector::value_type* actual,
-        const size_t      size,
+        const size_t      count,
         const double      abs_error)
 {
-    return detail::assertDeviceArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
+    return detail::assertDeviceArrayNear(expected_expr, actual_expr, count_expr, abs_error_expr, expected, actual, count, abs_error);
 }
 
 
@@ -147,14 +147,14 @@ template <class T>
 ::testing::AssertionResult assertDeviceArrayNear(
         const char*  expected_expr,
         const char*  actual_expr,
-        const char*  size_expr,
+        const char*  count_expr,
         const char*  abs_error_expr,
         const T*     expected,
         const T*     actual,
-        const size_t size,
+        const size_t count,
         const double abs_error)
 {
-    return detail::assertDeviceArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
+    return detail::assertDeviceArrayNear(expected_expr, actual_expr, count_expr, abs_error_expr, expected, actual, count, abs_error);
 }
 
 

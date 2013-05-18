@@ -28,8 +28,8 @@ namespace gcuda
  * \code
  * #include <gcuda/gcuda.h>
  *
- * std::vector<int> a(size);
- * std::vector<int> b(size);
+ * std::vector<int> a(count);
+ * std::vector<int> b(count);
  *
  * ASSERT_HOST_VECTOR_EQ(a, b);
  *
@@ -41,8 +41,8 @@ namespace gcuda
  * #include <gcuda/gcuda.h>
  * #include <thrust/host_vector.h>
  *
- * thrust::host_vector<float4> a(size);
- * thrust::host_vector<float4> b(size);
+ * thrust::host_vector<float4> a(count);
+ * thrust::host_vector<float4> b(count);
  *
  * ASSERT_HOST_VECTOR_EQ(a, b);
  *
@@ -60,15 +60,15 @@ namespace gcuda
  * \code
  * #include <gcuda/gcuda.h>
  *
- * float* a = new float[size];
- * float* b = new float[size];
+ * float* a = new float[count];
+ * float* b = new float[count];
  *
- * ASSERT_HOST_VECTOR_EQ(a, b, size);
+ * ASSERT_HOST_VECTOR_EQ(a, b, count);
  *
  * \endcode
  */
-#define ASSERT_HOST_ARRAY_EQ(expected, actual, size) \
-    ASSERT_PRED_FORMAT3(gcuda::assertHostArrayEq, expected, actual, size)
+#define ASSERT_HOST_ARRAY_EQ(expected, actual, count) \
+    ASSERT_PRED_FORMAT3(gcuda::assertHostArrayEq, expected, actual, count)
 
 
 /*!
@@ -82,8 +82,8 @@ namespace gcuda
  * #include <gcuda/gcuda.h>
  * #include <thrust/host_vector.h>
  *
- * thrust::host_vector<float4> a(size);
- * thrust::host_vector<float4> b(size);
+ * thrust::host_vector<float4> a(count);
+ * thrust::host_vector<float4> b(count);
  *
  * ASSERT_HOST_VECTOR_NEAR(a, b, 0.0001);
  *
@@ -102,15 +102,15 @@ namespace gcuda
  * \code
  * #include <gcuda/gcuda.h>
  *
- * double3* a = new double3[size];
- * double3* b = new double3[size];
+ * double3* a = new double3[count];
+ * double3* b = new double3[count];
  *
- * ASSERT_HOST_ARRAY_NEAR(a, b, size, 0.0001);
+ * ASSERT_HOST_ARRAY_NEAR(a, b, count, 0.0001);
  *
  * \endcode
  */
-#define ASSERT_HOST_ARRAY_NEAR(expected, actual, size, abs_error) \
-    ASSERT_PRED_FORMAT4(gcuda::assertHostArrayNear, expected, actual, size, abs_error)
+#define ASSERT_HOST_ARRAY_NEAR(expected, actual, count, abs_error) \
+    ASSERT_PRED_FORMAT4(gcuda::assertHostArrayNear, expected, actual, count, abs_error)
 
 
 /*!
@@ -124,8 +124,8 @@ namespace gcuda
  * #include <thrust/device_vector.h>
  * #include <thrust/host_vector.h>
  *
- * thrust::host_vector<float4> a(size);
- * thrust::device_vector<float4> b(size);
+ * thrust::host_vector<float4> a(count);
+ * thrust::device_vector<float4> b(count);
  *
  * ASSERT_DEVICE_VECTOR_EQ(a, b);
  *
@@ -145,10 +145,10 @@ namespace gcuda
  * #include <gcuda/gcuda.h>
  * #include <thrust/host_vector.h>
  *
- * thrust::host_vector<float4> a(size);
+ * thrust::host_vector<float4> a(count);
  * float4* d_data; // device pointer
  *
- * ASSERT_DEVICE_ARRAY_EQ(a, d_data, size);
+ * ASSERT_DEVICE_ARRAY_EQ(a, d_data, count);
  * \endcode
  *
  *
@@ -159,12 +159,12 @@ namespace gcuda
  * float4  h_data; // host pointer
  * float4* d_data; // device pointer
  *
- * ASSERT_DEVICE_ARRAY_EQ(h_data, d_data, size);
+ * ASSERT_DEVICE_ARRAY_EQ(h_data, d_data, count);
  *
  * \endcode
  */
-#define ASSERT_DEVICE_ARRAY_EQ(expected, actual, size) \
-    ASSERT_PRED_FORMAT3(gcuda::assertDeviceArrayEq, expected, actual, size)
+#define ASSERT_DEVICE_ARRAY_EQ(expected, actual, count) \
+    ASSERT_PRED_FORMAT3(gcuda::assertDeviceArrayEq, expected, actual, count)
 
 
 /*!
@@ -178,8 +178,8 @@ namespace gcuda
  * #include <thrust/device_vector.h>
  * #include <thrust/host_vector.h>
  *
- * thrust::host_vector<float4> a(size);
- * thrust::device_vector<float4> b(size);
+ * thrust::host_vector<float4> a(count);
+ * thrust::device_vector<float4> b(count);
  *
  * ASSERT_DEVICE_VECTOR_NEAR(a, b, 0.0001);
  *
@@ -199,10 +199,10 @@ namespace gcuda
  * #include <gcuda/gcuda.h>
  * #include <thrust/host_vector.h>
  *
- * thrust::host_vector<float4> a(size);
+ * thrust::host_vector<float4> a(count);
  * float4* d_data; // device pointer
  *
- * ASSERT_DEVICE_ARRAY_NEAR(a, d_data, size, 0.00001);
+ * ASSERT_DEVICE_ARRAY_NEAR(a, d_data, count, 0.00001);
  * \endcode
  *
  *
@@ -213,12 +213,12 @@ namespace gcuda
  * float4  h_data; // host pointer
  * float4* d_data; // device pointer
  *
- * ASSERT_DEVICE_ARRAY_EQ(h_data, d_data, size, 0.0001);
+ * ASSERT_DEVICE_ARRAY_EQ(h_data, d_data, count, 0.0001);
  *
  * \endcode
  */
-#define ASSERT_DEVICE_ARRAY_NEAR(expected, actual, size, abs_error) \
-    ASSERT_PRED_FORMAT4(gcuda::assertDeviceArrayNear, expected, actual, size, abs_error)
+#define ASSERT_DEVICE_ARRAY_NEAR(expected, actual, count, abs_error) \
+    ASSERT_PRED_FORMAT4(gcuda::assertDeviceArrayNear, expected, actual, count, abs_error)
 
 
 
@@ -229,32 +229,32 @@ namespace gcuda
     EXPECT_PRED_FORMAT2(gcuda::assertHostVectorEq, expected, actual)
 
 
-#define EXPECT_HOST_ARRAY_EQ(expected, actual, size) \
-    EXPECT_PRED_FORMAT3(gcuda::assertHostArrayEq, expected, actual, size)
+#define EXPECT_HOST_ARRAY_EQ(expected, actual, count) \
+    EXPECT_PRED_FORMAT3(gcuda::assertHostArrayEq, expected, actual, count)
 
 
 #define EXPECT_HOST_VECTOR_NEAR(expected, actual, abs_error) \
     EXPECT_PRED_FORMAT3(gcuda::assertHostVectorNear, expected, actual, abs_error)
 
 
-#define EXPECT_HOST_ARRAY_NEAR(expected, actual, size, abs_error) \
-    EXPECT_PRED_FORMAT4(gcuda::assertHostArrayNear, expected, actual, size, abs_error)
+#define EXPECT_HOST_ARRAY_NEAR(expected, actual, count, abs_error) \
+    EXPECT_PRED_FORMAT4(gcuda::assertHostArrayNear, expected, actual, count, abs_error)
 
 
 #define EXPECT_DEVICE_VECTOR_EQ(expected, actual) \
     EXPECT_PRED_FORMAT2(gcuda::assertDeviceVectorEq, expected, actual)
 
 
-#define EXPECT_DEVICE_ARRAY_EQ(expected, actual, size) \
-    EXPECT_PRED_FORMAT3(gcuda::assertDeviceArrayEq, expected, actual, size)
+#define EXPECT_DEVICE_ARRAY_EQ(expected, actual, count) \
+    EXPECT_PRED_FORMAT3(gcuda::assertDeviceArrayEq, expected, actual, count)
 
 
 #define EXPECT_DEVICE_VECTOR_NEAR(expected, actual, abs_error) \
     EXPECT_PRED_FORMAT3(gcuda::assertDeviceVectorNear, expected, actual, abs_error)
 
 
-#define EXPECT_DEVICE_ARRAY_NEAR(expected, actual, size, abs_error) \
-    EXPECT_PRED_FORMAT4(gcuda::assertDeviceArrayNear, expected, actual, size, abs_error)
+#define EXPECT_DEVICE_ARRAY_NEAR(expected, actual, count, abs_error) \
+    EXPECT_PRED_FORMAT4(gcuda::assertDeviceArrayNear, expected, actual, count, abs_error)
 
 
 } // namespace gcuda

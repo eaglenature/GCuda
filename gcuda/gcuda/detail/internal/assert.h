@@ -22,9 +22,9 @@ template <class T>
 std::pair<size_t, bool> assertArrayEq(
         const T*     expected,
         const T*     actual,
-        const size_t size)
+        const size_t count)
 {
-    for (size_t n = 0; n < size; ++n)
+    for (size_t n = 0; n < count; ++n)
     {
         if (!detail::compareEq(expected[n], actual[n]))
         {
@@ -40,10 +40,10 @@ template <class T>
 std::pair<size_t, bool> assertArrayNear(
         const T*     expected,
         const T*     actual,
-        const size_t size,
+        const size_t count,
         const double abs_error)
 {
-    for (size_t n = 0; n < size; ++n)
+    for (size_t n = 0; n < count; ++n)
     {
         if (!detail::compareNear(expected[n], actual[n], abs_error))
         {

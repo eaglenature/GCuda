@@ -22,9 +22,9 @@ struct message
     const size_t index;
     const T*     expected;
     const T*     actual;
-    message(const char* expr1, const char* expr2, size_t index, const T* const expected, const T* const actual)
+    message(const char* expr1, const char* expr2, size_t index, const T* expected, const T* actual)
         : expr1(expr1), expr2(expr2), index(index), expected(expected), actual(actual)
-    {}
+    {};
 };
 
 template <class T>

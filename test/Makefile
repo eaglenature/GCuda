@@ -55,8 +55,11 @@ DEPS =
 #------------------------------------------------------------------------------------------------
 
 all:
-	make devicetest
-	make hosttest
+	make compare
+	make hostarray
+	make hostvector
+	make devicearray
+	make devicevector
 
 #------------------------------------------------------------------------------------------------
 #  make clean
@@ -67,22 +70,52 @@ clean:
 	rm -f *.i* *.cubin *.ptx *.o
 
 #------------------------------------------------------------------------------------------------
-#  make devicetest
+#  make compare
 #------------------------------------------------------------------------------------------------
 
-devicetest: bin/devicetest
+compare: bin/compare
 
-bin/devicetest : devicetest.cu $(DEPS)
+bin/compare : compare.cu $(DEPS)
 	mkdir -p bin
-	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/devicetest devicetest.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
+	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/compare compare.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
 
 #------------------------------------------------------------------------------------------------
-#  make hosttest
+#  make hostarray
 #------------------------------------------------------------------------------------------------
 
-hosttest: bin/hosttest
+hostarray: bin/hostarray
 
-bin/hosttest : hosttest.cu $(DEPS)
+bin/hostarray : hostarray.cu $(DEPS)
 	mkdir -p bin
-	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/hosttest hosttest.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
+	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/hostarray hostarray.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
+	
+#------------------------------------------------------------------------------------------------
+#  make hostvector
+#------------------------------------------------------------------------------------------------
+
+hostvector: bin/hostvector
+
+bin/hostvector : hostvector.cu $(DEPS)
+	mkdir -p bin
+	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/hostvector hostvector.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
+
+#------------------------------------------------------------------------------------------------
+#  make devicearray
+#------------------------------------------------------------------------------------------------
+
+devicearray: bin/devicearray
+
+bin/devicearray : devicearray.cu $(DEPS)
+	mkdir -p bin
+	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/devicearray devicearray.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
+
+#------------------------------------------------------------------------------------------------
+#  make devicevector
+#------------------------------------------------------------------------------------------------
+
+devicevector: bin/devicevector
+
+bin/devicevector : devicevector.cu $(DEPS)
+	mkdir -p bin
+	$(NVCC) $(DEFINES) $(DEVICE_ARCH) -o bin/devicevector devicevector.cu $(NVCCFLAGS) $(HOST_ARCH) $(INC) $(LIB) -O3
 
