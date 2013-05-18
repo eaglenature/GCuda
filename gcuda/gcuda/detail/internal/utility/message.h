@@ -35,7 +35,7 @@ std::ostream& operator<<(std::ostream& os, const message<T>& msg)
        << "\nExpected: " << detail::format(msg.expected[msg.index])
        << "\nActual:   " << detail::format(msg.actual[msg.index]);
     return os;
-}
+} //TODO Format vector element output
 
 } // namespace detail
 } // namespace gcuda

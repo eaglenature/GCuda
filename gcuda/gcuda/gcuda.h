@@ -223,7 +223,7 @@ namespace gcuda
 
 
 /**
- * Expect does not hold test. Examples like in ASSERTS (TODO)
+ * Expect does not hold test. Examples like in ASSERTS (TODO add examples and unit tests)
  */
 #define EXPECT_HOST_VECTOR_EQ(expected, actual) \
     EXPECT_PRED_FORMAT2(gcuda::assertHostVectorEq, expected, actual)

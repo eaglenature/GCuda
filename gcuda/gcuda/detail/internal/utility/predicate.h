@@ -34,7 +34,7 @@ struct predicate<T, single_prec_float_component_tag>
     }
     static bool is_near(const T& lhs, const T& rhs, double abs_error)
     {
-        return std::fabs(lhs - rhs) < abs_error; // TODO
+        return std::fabs(lhs - rhs) < abs_error; // TODO correct solution
     }
 };
 
@@ -48,7 +48,7 @@ struct predicate<T, double_prec_float_component_tag>
     }
     static bool is_near(const T& lhs, const T& rhs, double abs_error)
     {
-        return std::fabs(lhs - rhs) < abs_error; // TODO
+        return std::fabs(lhs - rhs) < abs_error; // TODO correct solution
     }
 };
 
