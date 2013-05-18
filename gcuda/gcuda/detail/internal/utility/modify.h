@@ -21,21 +21,20 @@ namespace detail
 template <class ComponentTag>
 std::ostream& modify(std::ostream& os)
 {
-    os << "Intergral: "; // TODO remove debug string
     return os;
 }
 
 template <>
 std::ostream& modify<single_prec_float_component_tag>(std::ostream& os)
 {
-    os << "Single Floating point: " << std::setprecision(std::numeric_limits<float>::digits10 + 2); // TODO remove debug string
+    os << std::setprecision(std::numeric_limits<float>::digits10 + 2);
     return os;
 }
 
 template <>
 std::ostream& modify<double_prec_float_component_tag>(std::ostream& os)
 {
-    os << "Double Floating point: " << std::setprecision(std::numeric_limits<double>::digits10 + 2); // TODO remove debug string
+    os << std::setprecision(std::numeric_limits<double>::digits10 + 2);
     return os;
 }
 
