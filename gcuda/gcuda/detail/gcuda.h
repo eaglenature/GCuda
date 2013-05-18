@@ -45,11 +45,12 @@ template <class HostVector>
 ::testing::AssertionResult assertHostVectorNear(
         const char*       expected_expr,
         const char*       actual_expr,
+        const char*       abs_error_expr,
         const HostVector& expected,
         const HostVector& actual,
         const double      abs_error)
 {
-    return detail::assertHostVectorNear(expected_expr, actual_expr, expected, actual, abs_error);
+    return detail::assertHostVectorNear(expected_expr, actual_expr, abs_error_expr, expected, actual, abs_error);
 }
 
 
@@ -59,12 +60,13 @@ template <class T>
         const char*  expected_expr,
         const char*  actual_expr,
         const char*  size_expr,
+        const char*  abs_error_expr,
         const T*     expected,
         const T*     actual,
         const size_t size,
         const double abs_error)
 {
-    return detail::assertHostArrayNear(expected_expr, actual_expr, size_expr, expected, actual, size, abs_error);
+    return detail::assertHostArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
 }
 
 

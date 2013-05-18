@@ -17,23 +17,23 @@ namespace detail
 template <class T>
 struct message
 {
-    const char* a;
-    const char* b;
+    const char*  expr1;
+    const char*  expr2;
     const size_t index;
-    const T* expected;
-    const T* actual;
-    message(const char* a, const char* b, size_t index, const T* const expected, const T* const actual)
-        : a(a), b(b), index(index), expected(expected), actual(actual)
+    const T*     expected;
+    const T*     actual;
+    message(const char* expr1, const char* expr2, size_t index, const T* const expected, const T* const actual)
+        : expr1(expr1), expr2(expr2), index(index), expected(expected), actual(actual)
     {}
 };
 
 template <class T>
 std::ostream& operator<<(std::ostream& os, const message<T>& msg)
 {
-    os << msg.a << " and " << msg.b
+    os << msg.expr1 << " and " << msg.expr2
        << " Element: "   << msg.index
-       << "\nExpected: " << format(msg.expected[msg.index])
-       << "\nActual:   " << format(msg.actual[msg.index]);
+       << "\nExpected: " << detail::format(msg.expected[msg.index])
+       << "\nActual:   " << detail::format(msg.actual[msg.index]);
     return os;
 }
 

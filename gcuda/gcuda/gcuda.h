@@ -14,6 +14,7 @@
 #error  NVCC compiler required
 #endif
 
+
 #include <gcuda/detail/gcuda.h>
 
 
@@ -254,7 +255,6 @@ namespace gcuda
 
 #define EXPECT_DEVICE_ARRAY_NEAR(expected, actual, size, abs_error) \
     EXPECT_PRED_FORMAT4(gcuda::assertDeviceArrayNear, expected, actual, size, abs_error)
-
 
 
 } // namespace gcuda

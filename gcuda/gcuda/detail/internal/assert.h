@@ -18,7 +18,7 @@ namespace detail
 {
 
 
-template <typename T>
+template <class T>
 std::pair<size_t, bool> assertArrayEq(
         const T*     expected,
         const T*     actual,
@@ -36,7 +36,7 @@ std::pair<size_t, bool> assertArrayEq(
 
 
 
-template <typename T>
+template <class T>
 std::pair<size_t, bool> assertArrayNear(
         const T*     expected,
         const T*     actual,
