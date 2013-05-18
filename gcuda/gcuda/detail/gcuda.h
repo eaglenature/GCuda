@@ -11,9 +11,9 @@
 #include <gcuda/detail/internal/assert_device.h>
 #include <gcuda/detail/internal/assert_host.h>
 
-
 namespace gcuda
 {
+
 
 template <class HostVector>
 ::testing::AssertionResult assertHostVectorEq(
@@ -24,6 +24,8 @@ template <class HostVector>
 {
     return detail::assertHostVectorEq(expected_expr, actual_expr, expected, actual);
 }
+
+
 
 template <class T>
 ::testing::AssertionResult assertHostArrayEq(
@@ -37,6 +39,8 @@ template <class T>
     return detail::assertHostArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
 }
 
+
+
 template <class HostVector>
 ::testing::AssertionResult assertHostVectorNear(
         const char*       expected_expr,
@@ -47,6 +51,8 @@ template <class HostVector>
 {
     return detail::assertHostVectorNear(expected_expr, actual_expr, expected, actual, abs_error);
 }
+
+
 
 template <class T>
 ::testing::AssertionResult assertHostArrayNear(
@@ -61,6 +67,8 @@ template <class T>
     return detail::assertHostArrayNear(expected_expr, actual_expr, size_expr, expected, actual, size, abs_error);
 }
 
+
+
 template <class HostVector,
           class DeviceVector>
 ::testing::AssertionResult assertDeviceVectorEq(
@@ -71,6 +79,8 @@ template <class HostVector,
 {
     return detail::assertDeviceVectorEq(expected_expr, actual_expr, expected, actual);
 }
+
+
 
 template <class HostVector>
 ::testing::AssertionResult assertDeviceArrayEq(
@@ -84,6 +94,8 @@ template <class HostVector>
     return detail::assertDeviceArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
 }
 
+
+
 template <class T>
 ::testing::AssertionResult assertDeviceArrayEq(
         const char*  expected_expr,
@@ -95,6 +107,8 @@ template <class T>
 {
     return detail::assertDeviceArrayEq(expected_expr, actual_expr, size_expr, expected, actual, size);
 }
+
+
 
 template <class HostVector,
           class DeviceVector>
@@ -108,6 +122,8 @@ template <class HostVector,
 {
     return detail::assertDeviceVectorNear(expected_expr, actual_expr, abs_error_expr, expected, actual, abs_error);
 }
+
+
 
 template <class HostVector>
 ::testing::AssertionResult assertDeviceArrayNear(
@@ -123,6 +139,8 @@ template <class HostVector>
     return detail::assertDeviceArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
 }
 
+
+
 template <class T>
 ::testing::AssertionResult assertDeviceArrayNear(
         const char*  expected_expr,
@@ -136,6 +154,7 @@ template <class T>
 {
     return detail::assertDeviceArrayNear(expected_expr, actual_expr, size_expr, abs_error_expr, expected, actual, size, abs_error);
 }
+
 
 } // namespace gcuda
 

@@ -17,6 +17,7 @@ namespace gcuda
 namespace detail
 {
 
+
 template <typename T>
 std::pair<size_t, bool> assertArrayEq(
         const T*     expected,
@@ -32,6 +33,7 @@ std::pair<size_t, bool> assertArrayEq(
     }
     return std::make_pair(0, true);
 }
+
 
 
 template <typename T>

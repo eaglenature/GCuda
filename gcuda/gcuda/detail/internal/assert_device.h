@@ -15,11 +15,13 @@ namespace gcuda
 {
 namespace detail
 {
+
 //-------------------------------------------------------------//
 //                                                             //
-//              Device containers assertions                   //
+//                 Device array assertions                     //
 //                                                             //
 //-------------------------------------------------------------//
+
 template <class HostVector,
           class DeviceVector>
 ::testing::AssertionResult assertDeviceVectorEq(

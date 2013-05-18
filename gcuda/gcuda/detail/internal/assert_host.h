@@ -15,11 +15,13 @@ namespace gcuda
 {
 namespace detail
 {
+
 //-------------------------------------------------------------//
 //                                                             //
-//              Host containers assertions                     //
+//                 Host array assertions                       //
 //                                                             //
 //-------------------------------------------------------------//
+
 template <class HostVector>
 ::testing::AssertionResult assertHostVectorEq(
         const char*       expected_expr,
