@@ -19,10 +19,10 @@ struct message
 {
     const char*  expr1;
     const char*  expr2;
-    const size_t index;
+    const std::size_t index;
     const T*     expect;
     const T*     actual;
-    message(const char* expr1, const char* expr2, size_t index, const T* expect, const T* actual)
+    message(const char* expr1, const char* expr2, std::size_t index, const T* expect, const T* actual)
         : expr1(expr1), expr2(expr2), index(index), expect(expect), actual(actual)
     {};
 };

@@ -30,7 +30,7 @@ template <class HostVector,
         const HostVector&   expected,
         const DeviceVector& actual)
 {
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
     typedef typename HostVector::value_type T;
 
     HostVector actualCopy = actual;
@@ -52,10 +52,10 @@ template <class HostVector>
         const char*       count_expr,
         const HostVector& expected,
         const typename HostVector::value_type* actual,
-        const size_t      count)
+        const std::size_t count)
 {
     typedef typename HostVector::value_type RawType;
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     HostVector actualCopy(count);
     EXPECT_EQ(cudaMemcpy(actualCopy.data(), actual, sizeof(RawType) * count, cudaMemcpyDeviceToHost), cudaSuccess);
@@ -77,9 +77,9 @@ template <class T>
         const char*  count_expr,
         const T*     expected,
         const T*     actual,
-        const size_t count)
+        const std::size_t count)
 {
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     std::vector<T> actualCopy(count);
     EXPECT_EQ(cudaMemcpy(actualCopy.data(), actual, sizeof(T) * count, cudaMemcpyDeviceToHost), cudaSuccess);
@@ -105,7 +105,7 @@ template <class HostVector,
         const double        abs_error)
 {
     typedef typename HostVector::value_type RawType;
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     HostVector actualCopy = actual;
 
@@ -127,11 +127,11 @@ template <class HostVector>
         const char*       abs_error_expr,
         const HostVector& expected,
         const typename HostVector::value_type* actual,
-        const size_t      count,
+        const std::size_t count,
         const double      abs_error)
 {
     typedef typename HostVector::value_type RawType;
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     HostVector actualCopy(count);
     EXPECT_EQ(cudaMemcpy(actualCopy.data(), actual, sizeof(RawType) * count, cudaMemcpyDeviceToHost), cudaSuccess);
@@ -154,7 +154,7 @@ template <class T>
         const char*  abs_error_expr,
         const T*     expected,
         const T*     actual,
-        const size_t count,
+        const std::size_t count,
         const double abs_error)
 {
     typedef std::pair<size_t, bool> ResultPair;

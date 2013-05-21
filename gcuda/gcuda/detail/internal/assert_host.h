@@ -30,7 +30,7 @@ template <class HostVector>
         const HostVector& actual)
 {
     typedef typename HostVector::value_type RawType;
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     const ResultPair resultPair = detail::assertArrayEq(expected.data(), actual.data(), actual.size());
     if (resultPair.second)
@@ -49,9 +49,9 @@ template <class T>
         const char*  count_expr,
         const T*     expected,
         const T*     actual,
-        const size_t count)
+        const std::size_t count)
 {
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     const ResultPair resultPair = detail::assertArrayEq(expected, actual, count);
     if (resultPair.second)
@@ -73,7 +73,7 @@ template <class HostVector>
         const double      abs_error)
 {
     typedef typename HostVector::value_type RawType;
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     const ResultPair resultPair = detail::assertArrayNear(expected.data(), actual.data(), actual.size(), abs_error);
     if (resultPair.second)
@@ -93,10 +93,10 @@ template <class T>
         const char*  abs_error_expr,
         const T*     expected,
         const T*     actual,
-        const size_t count,
+        const std::size_t count,
         const double abs_error)
 {
-    typedef std::pair<size_t, bool> ResultPair;
+    typedef std::pair<std::size_t, bool> ResultPair;
 
     const ResultPair resultPair = detail::assertArrayNear(expected, actual, count, abs_error);
     if (resultPair.second)
