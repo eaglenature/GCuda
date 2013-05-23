@@ -1,5 +1,6 @@
 #################################################################################################
 #  Build script for unit tests
+#  Usage: make <target> [sm=sm21]
 #################################################################################################
 
 NVCC = "$(shell which nvcc)"
@@ -16,13 +17,39 @@ DEVICE_ARCH_SM13 = -gencode=arch=compute_13,code=\"sm_13,compute_13\"
 DEVICE_ARCH_SM11 = -gencode=arch=compute_11,code=\"sm_11,compute_11\"
 DEVICE_ARCH_SM10 = -gencode=arch=compute_10,code=\"sm_10,compute_10\"
 
-DEVICE_ARCH = $(DEVICE_ARCH_SM21)
+ifdef sm
+	SM_ARCH = $(sm)
+else
+	SM_ARCH = sm21
+endif
+
+ifeq (sm35, $(findstring sm35, $(SM_ARCH)))
+	DEVICE_ARCH = $(DEVICE_ARCH_SM35)
+endif
+ifeq (sm30, $(findstring sm30, $(SM_ARCH)))
+	DEVICE_ARCH = $(DEVICE_ARCH_SM30)
+endif
+ifeq (sm21, $(findstring sm21, $(SM_ARCH)))
+	DEVICE_ARCH = $(DEVICE_ARCH_SM21)
+endif
+ifeq (sm20, $(findstring sm20, $(SM_ARCH)))
+	DEVICE_ARCH = $(DEVICE_ARCH_SM20)
+endif
+ifeq (sm13, $(findstring sm13, $(SM_ARCH)))
+	DEVICE_ARCH = $(DEVICE_ARCH_SM13)
+endif
+ifeq (sm11, $(findstring sm11, $(SM_ARCH)))
+	DEVICE_ARCH = $(DEVICE_ARCH_SM11)
+endif
+ifeq (sm10, $(findstring sm10, $(SM_ARCH)))
+	DEVICE_ARCH = $(DEVICE_ARCH_SM10)
+endif
 
 #------------------------------------------------------------------------------------------------
 #  Includes
 #------------------------------------------------------------------------------------------------
 
-INC = -I/usr/include -I. -I../gcuda
+INC = -I. -I../gcuda
 
 #------------------------------------------------------------------------------------------------
 #  Libraries
