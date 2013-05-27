@@ -1,0 +1,23 @@
+/**
+ * \mainpage
+ *
+ * \tableofcontents
+ *
+ * \htmlonly
+ * <a href="https://github.com/eaglenature/GCuda"><em>Browse or fork GCuda at GitHub!</em></a>
+ * <br>
+ * <a href="http://code.google.com/p/googletest/"><em>Google C++ Testing Framework</em></a>
+ * <br>
+ * <a href="http://docs.nvidia.com/cuda/index.html"><em>CUDA Toolkit Documentation</em></a>
+ * \endhtmlonly
+ *
+ * \section sec0 (1) What is GCuda?
+ *
+ *
+ * \section sec2 (2) Quick Start Guide
+ *
+ * \subsection sec3sec1 2.1 &nbsp;&nbsp; Introduction
+ * \subsection sec3sec2 2.2 &nbsp;&nbsp; Prerequisites
+ * \subsection sec3sec3 2.3 &nbsp;&nbsp; Examples
+ *
+ */

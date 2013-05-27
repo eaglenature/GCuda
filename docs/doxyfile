@@ -42,7 +42,7 @@ PROJECT_NUMBER         =
 # a quick idea about the purpose of the project. Keep the description short.
 # Changed by eaglenature.
 
-PROJECT_BRIEF          = "Cuda C++ extension for Google C++ Testing Framework"
+PROJECT_BRIEF          =
 
 # With the PROJECT_LOGO tag one can specify an logo or icon that is
 # included in the documentation. The maximum height of the logo should not
@@ -659,7 +659,8 @@ WARN_LOGFILE           =
 # with spaces.
 # TODO(Add mainpage.dox). Changed by eaglenature.
 
-INPUT                  = ../gcuda
+INPUT                  = mainpage.dox
+INPUT                  += ../gcuda/gcuda/gcuda.h
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -721,7 +722,7 @@ EXCLUDE_SYMBOLS        =
 # directories that contain example code fragments that are included (see
 # the \include command).
 
-EXAMPLE_PATH           =
+EXAMPLE_PATH           = .
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp
@@ -741,7 +742,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see
 # the \image command).
 
-IMAGE_PATH             =
+IMAGE_PATH             = images
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -822,7 +823,7 @@ REFERENCED_BY_RELATION = YES
 # called/used by that function will be listed.
 # Changed by eaglenature. Default NO
 
-REFERENCES_RELATION    = YES
+REFERENCES_RELATION    = NO
 
 # If the REFERENCES_LINK_SOURCE tag is set to YES (the default)
 # and SOURCE_BROWSER tag is set to YES, then the hyperlinks from
@@ -927,7 +928,7 @@ HTML_STYLESHEET        =
 # the output directory.
 # TODO(Add extrastylesheet.css). Changed by eaglenature.
 
-HTML_EXTRA_STYLESHEET  =
+HTML_EXTRA_STYLESHEET  = extrastylesheet.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
