@@ -13,11 +13,108 @@
  *
  * \section sec0 (1) What is GCuda?
  *
+ * \par
+ * <b><em>Overview</em></b>. <em>GCuda</em> is collection of unit testing assertion and expect macros built on top of the <em>Google C++ Testing Framework</em>
+ * that could be particulary useful for test driven <em>CUDA</em> code development.
+ *
  *
  * \section sec2 (2) Quick Start Guide
  *
  * \subsection sec3sec1 2.1 &nbsp;&nbsp; Introduction
- * \subsection sec3sec2 2.2 &nbsp;&nbsp; Prerequisites
- * \subsection sec3sec3 2.3 &nbsp;&nbsp; Examples
  *
+ * \par
+ * <em>GCuda</em> is header based small C++ library with main header as follows
+ *
+ * \par 
+ * \code
+ * #include <gcuda/gcuda.h>
+ * \endcode  
+ *
+ * \subsection sec3sec2 2.2 &nbsp;&nbsp; Prerequisites
+ *
+ * \par
+ * - <em>GCuda</em> is compatibile with [gtest-1.6.0](http://code.google.com/p/googletest/downloads/list)
+ *   and [CUDA](https://developer.nvidia.com/cuda-downloads) 4.0 or better.
+ * - [NVCC](http://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html) compiler
+ *   on [Linux](http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-linux/index.html) platform is supported at the moment.
+ * - To start using <em>GCuda</em> with your Google C++ Test program make sure you have GCuda/gcuda
+ *   in the header search path so that the compiler can find main <em>GCuda</em> header <gcuda/gcuda.h>.
+ *
+ * 
+ * \subsection sec3sec3 2.3 &nbsp;&nbsp; Simple example
+ *
+ * \par 
+ * \code
+ * #include <gtest/gtest.h>
+ * #include <gcuda/gcuda.h>
+ *
+ * #include <algorithm>
+ * #include <thrust/host_vector.h>
+ * #include <thrust/device_vector.h>
+ * #include <thrust/sort.h> 
+ *
+ * TEST(Algorithms, Sort)
+ * {
+ *     const std::size_t count = 1 << 24;
+ *     thrust::host_vector<uint> h_keys(count);
+ *
+ *     // Generate random keys
+ *     for (std::size_t i = 0; i < count; ++i)
+ *     {
+ *         h_keys[i] = rand() % 100000;
+ *     }
+ *
+ *     // Copy keys to device
+ *     thrust::device_vector<T> d_keys = h_keys;
+ *
+ *     // Sort on host
+ *     std::sort(h_keys.begin(), h_keys.end());
+ *
+ *     // Sort on device
+ *     thrust::sort(d_keys.begin(), d_keys.end());
+ *
+ *     // GCuda assertion verifies correctness of device data vs. reference host data
+ *     ASSERT_DEVICE_VECTOR_EQ(h_keys, d_keys);
+ * }
+ * \endcode
+ *
+ *
+ * \section sec3 (3) GCuda binary assertions
+ *
+ * \par
+ * <b><em>Device assertions.</em></b> Compare device container elements vs. reference host container elements.
+ *
+ * \par
+ * <table>
+ * <tr> <td><b><em>Fatal assertion</em></b></td> <td><b><em>Nonfatal assertion</em></b></td> <td><b><em>Verifies</em></b></td> </tr>
+ * <tr> <td><b>ASSERT_DEVICE_VECTOR_EQ(expected, actual);</b></td> <td><b>EXPECT_DEVICE_VECTOR_EQ(expected, actual);</b></td> <td><b>expected == actual (element wise)</b></td> </tr>
+ * <tr> <td><b>ASSERT_DEVICE_VECTOR_NEAR(expected, actual, abs_error);</b></td> <td><b>EXPECT_DEVICE_VECTOR_NEAR(expected, actual, abs_error);</b></td> <td><b>the element wise difference doesn't exceed the given absolute error</b></td> </tr> 
+ * <tr> <td><b>ASSERT_DEVICE_ARRAY_EQ(expected, actual, count);</b></td> <td><b>EXPECT_DEVICE_ARRAY_EQ(expected, actual, count);</b></td> <td><b>expected == actual (element wise)</b></td> </tr>
+ * <tr> <td><b>ASSERT_DEVICE_ARRAY_NEAR(expected, actual, count, abs_error);</b></td> <td><b>EXPECT_DEVICE_ARRAY_NEAR(expected, actual, count, abs_error);</b></td> <td><b>the element wise difference doesn't exceed the given absolute error</b></td> </tr> 
+ * </table>
+ *
+ * \par
+ * <b><em>Host assertions.</em></b> Compare two host containers data.
+ *
+ * \par
+ * <table> 
+ * <tr> <td><b><em>Fatal assertion</em></b></td> <td><b><em>Nonfatal assertion</em></b></td> <td><b><em>Verifies</em></b></td> </tr>
+ * <tr> <td><b>ASSERT_HOST_VECTOR_EQ(expected, actual);</b></td> <td><b>EXPECT_HOST_VECTOR_EQ(expected, actual);</b></td> <td><b>expected == actual (element wise)</b></td> </tr>
+ * <tr> <td><b>ASSERT_HOST_VECTOR_NEAR(expected, actual, abs_error);</b></td> <td><b>EXPECT_HOST_VECTOR_NEAR(expected, actual, abs_error);</b></td> <td><b>the element wise difference doesn't exceed the given absolute error</b></td> </tr> 
+ * <tr> <td><b>ASSERT_HOST_ARRAY_EQ(expected, actual, count);</b></td> <td><b>EXPECT_HOST_ARRAY_EQ(expected, actual, count);</b></td> <td><b>expected == actual (element wise)</b></td> </tr>
+ * <tr> <td><b>ASSERT_HOST_ARRAY_NEAR(expected, actual, count, abs_error);  </b></td> <td><b>EXPECT_HOST_ARRAY_NEAR(expected, actual, count, abs_error);</b></td> <td><b>the element wise difference doesn't exceed the given absolute error</b></td> </tr> 
+ * </table> 
+ *
+ *
+ * \section sec4 (4) Contributors
+ *
+ * \par
+ * <em>GCuda</em> is developed as an open-source project by [azja](https://github.com/azja) and [eaglenature](https://github.com/eaglenature).
+ *
+ *
+ * \section sec5 (5) Open Source License
+ *
+ * \par
+ * TBD
+ * 
  */
