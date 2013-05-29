@@ -81,9 +81,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <ul><li class="level1"><a href="#sec0">(1) What is GCuda?</a></li>
 <li class="level1"><a href="#sec2">(2) Quick Start Guide</a><ul><li class="level2"><a href="#sec3sec1">2.1 &nbsp;&nbsp; Introduction</a></li>
 <li class="level2"><a href="#sec3sec2">2.2 &nbsp;&nbsp; Prerequisites</a></li>
-<li class="level2"><a href="#sec3sec3">2.3 &nbsp;&nbsp; Examples</a></li>
+<li class="level2"><a href="#sec3sec3">2.3 &nbsp;&nbsp; Simple example</a></li>
 </ul>
 </li>
+<li class="level1"><a href="#sec3">(3) GCuda binary assertions</a></li>
+<li class="level1"><a href="#sec4">(4) Contributors</a></li>
+<li class="level1"><a href="#sec5">(5) Open Source License</a></li>
 </ul>
 </div>
 <div class="textblock"> 
@@ -94,18 +97,96 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="http://docs.nvidia.com/cuda/index.html"><em>CUDA Toolkit Documentation</em></a>
 <h1><a class="anchor" id="sec0"></a>
 (1) What is GCuda?</h1>
+<dl class="section user"><dt></dt><dd><b><em>Overview</em></b>. <em>GCuda</em> is collection of unit testing assertion and expect macros built on top of the <em>Google C++ Testing Framework</em> that could be particulary useful for test driven <em>CUDA</em> code development.</dd></dl>
 <h1><a class="anchor" id="sec2"></a>
 (2) Quick Start Guide</h1>
 <h2><a class="anchor" id="sec3sec1"></a>
 2.1    Introduction</h2>
+<dl class="section user"><dt></dt><dd><em>GCuda</em> is header based small C++ library with main header as follows</dd></dl>
+<dl class="section user"><dt></dt><dd><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;gcuda/gcuda.h&gt;</span></div>
+</div><!-- fragment --></dd></dl>
 <h2><a class="anchor" id="sec3sec2"></a>
 2.2    Prerequisites</h2>
+<dl class="section user"><dt></dt><dd><ul>
+<li><em>GCuda</em> is compatibile with <a href="http://code.google.com/p/googletest/downloads/list">gtest-1.6.0</a> and <a href="https://developer.nvidia.com/cuda-downloads">CUDA</a> 4.0 or better.</li>
+<li><a href="http://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html">NVCC</a> compiler on <a href="http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-linux/index.html">Linux</a> platform is supported at the moment.</li>
+<li>To start using <em>GCuda</em> with your Google C++ Test program make sure you have GCuda/gcuda in the header search path so that the compiler can find main <em>GCuda</em> header &lt;<a class="el" href="gcuda_8h_source.html">gcuda/gcuda.h</a>&gt;.</li>
+</ul>
+</dd></dl>
 <h2><a class="anchor" id="sec3sec3"></a>
-2.3    Examples</h2>
+2.3    Simple example</h2>
+<dl class="section user"><dt></dt><dd><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;gtest/gtest.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;gcuda/gcuda.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;thrust/host_vector.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;thrust/device_vector.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;thrust/sort.h&gt;</span> </div>
+<div class="line"></div>
+<div class="line">TEST(Algorithms, Sort)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">const</span> std::size_t count = 1 &lt;&lt; 24;</div>
+<div class="line">    thrust::host_vector&lt;uint&gt; h_keys(count);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Generate random keys</span></div>
+<div class="line">    <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; count; ++i)</div>
+<div class="line">    {</div>
+<div class="line">        h_keys[i] = rand() % 100000;</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Copy keys to device</span></div>
+<div class="line">    thrust::device_vector&lt;T&gt; d_keys = h_keys;</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Sort on host</span></div>
+<div class="line">    std::sort(h_keys.begin(), h_keys.end());</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Sort on device</span></div>
+<div class="line">    thrust::sort(d_keys.begin(), d_keys.end());</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// GCuda assertion verifies correctness of device data vs. reference host data</span></div>
+<div class="line">    ASSERT_DEVICE_VECTOR_EQ(h_keys, d_keys);</div>
+<div class="line">}</div>
+</div><!-- fragment --></dd></dl>
+<h1><a class="anchor" id="sec3"></a>
+(3) GCuda binary assertions</h1>
+<dl class="section user"><dt></dt><dd><b><em>Device assertions.</em></b> Compare device container elements vs. reference host container elements.</dd></dl>
+<dl class="section user"><dt></dt><dd><table class="doxtable">
+<tr>
+<td><b><em>Fatal assertion</em></b> </td><td><b><em>Nonfatal assertion</em></b> </td><td><b><em>Verifies</em></b>  </td></tr>
+<tr>
+<td><b>ASSERT_DEVICE_VECTOR_EQ(expected, actual);</b> </td><td><b>EXPECT_DEVICE_VECTOR_EQ(expected, actual);</b> </td><td><b>expected == actual (element wise)</b>  </td></tr>
+<tr>
+<td><b>ASSERT_DEVICE_VECTOR_NEAR(expected, actual, abs_error);</b> </td><td><b>EXPECT_DEVICE_VECTOR_NEAR(expected, actual, abs_error);</b> </td><td><b>the element wise difference doesn't exceed the given absolute error</b>  </td></tr>
+<tr>
+<td><b>ASSERT_DEVICE_ARRAY_EQ(expected, actual, count);</b> </td><td><b>EXPECT_DEVICE_ARRAY_EQ(expected, actual, count);</b> </td><td><b>expected == actual (element wise)</b>  </td></tr>
+<tr>
+<td><b>ASSERT_DEVICE_ARRAY_NEAR(expected, actual, count, abs_error);</b> </td><td><b>EXPECT_DEVICE_ARRAY_NEAR(expected, actual, count, abs_error);</b> </td><td><b>the element wise difference doesn't exceed the given absolute error</b>  </td></tr>
+</table>
+</dd></dl>
+<dl class="section user"><dt></dt><dd><b><em>Host assertions.</em></b> Compare two host containers data.</dd></dl>
+<dl class="section user"><dt></dt><dd><table class="doxtable">
+<tr>
+<td><b><em>Fatal assertion</em></b> </td><td><b><em>Nonfatal assertion</em></b> </td><td><b><em>Verifies</em></b>  </td></tr>
+<tr>
+<td><b>ASSERT_HOST_VECTOR_EQ(expected, actual);</b> </td><td><b>EXPECT_HOST_VECTOR_EQ(expected, actual);</b> </td><td><b>expected == actual (element wise)</b>  </td></tr>
+<tr>
+<td><b>ASSERT_HOST_VECTOR_NEAR(expected, actual, abs_error);</b> </td><td><b>EXPECT_HOST_VECTOR_NEAR(expected, actual, abs_error);</b> </td><td><b>the element wise difference doesn't exceed the given absolute error</b>  </td></tr>
+<tr>
+<td><b>ASSERT_HOST_ARRAY_EQ(expected, actual, count);</b> </td><td><b>EXPECT_HOST_ARRAY_EQ(expected, actual, count);</b> </td><td><b>expected == actual (element wise)</b>  </td></tr>
+<tr>
+<td><b>ASSERT_HOST_ARRAY_NEAR(expected, actual, count, abs_error); </b> </td><td><b>EXPECT_HOST_ARRAY_NEAR(expected, actual, count, abs_error);</b> </td><td><b>the element wise difference doesn't exceed the given absolute error</b>  </td></tr>
+</table>
+</dd></dl>
+<h1><a class="anchor" id="sec4"></a>
+(4) Contributors</h1>
+<dl class="section user"><dt></dt><dd><em>GCuda</em> is developed as an open-source project by <a href="https://github.com/azja">azja</a> and <a href="https://github.com/eaglenature">eaglenature</a>.</dd></dl>
+<h1><a class="anchor" id="sec5"></a>
+(5) Open Source License</h1>
+<dl class="section user"><dt></dt><dd>TBD </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 27 2013 23:15:08 for GCuda by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 29 2013 21:55:12 for GCuda by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
