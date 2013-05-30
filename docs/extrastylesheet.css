@@ -398,10 +398,17 @@ div.fragment
     border-style: dashed;
 }
 */
+
 div.line 
 {
     line-height: normal;
     font-size: 11px;
+}
+
+span.lineno
+{
+    color: #D1CFCF;
+    background-color: #0E3B65;
 }
 
 span.comment 
