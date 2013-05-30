@@ -24,7 +24,7 @@ namespace
 template <class RawType>
 std::string formatImpl(const RawType& v, dimension0)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
     std::stringstream ss;
     ss << modify<ComponentTag> << v;
     return ss.str();
@@ -33,7 +33,7 @@ std::string formatImpl(const RawType& v, dimension0)
 template <class RawType>
 std::string formatImpl(const RawType& v, dimension1)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
     std::stringstream ss;
     ss << modify<ComponentTag> << v.x;
     return ss.str();
@@ -42,7 +42,7 @@ std::string formatImpl(const RawType& v, dimension1)
 template <class RawType>
 std::string formatImpl(const RawType& v, dimension2)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
     std::stringstream ss;
     ss << modify<ComponentTag> << v.x << ", "
        << modify<ComponentTag> << v.y;
@@ -52,7 +52,7 @@ std::string formatImpl(const RawType& v, dimension2)
 template <class RawType>
 std::string formatImpl(const RawType& v, dimension3)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
     std::stringstream ss;
     ss << modify<ComponentTag> << v.x << ", "
        << modify<ComponentTag> << v.y << ", "
@@ -63,7 +63,7 @@ std::string formatImpl(const RawType& v, dimension3)
 template <class RawType>
 std::string formatImpl(const RawType& v, dimension4)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
     std::stringstream ss;
     ss << modify<ComponentTag> << v.x << ", "
        << modify<ComponentTag> << v.y << ", "

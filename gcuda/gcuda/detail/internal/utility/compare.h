@@ -23,47 +23,47 @@ namespace
 template <class RawType>
 bool compareEqImpl(const RawType& lhs, const RawType& rhs, dimension0)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_equal(lhs, rhs);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_equal(lhs, rhs);
 }
 
 template <class RawType>
 bool compareEqImpl(const RawType& lhs, const RawType& rhs, dimension1)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_equal(lhs.x, rhs.x);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_equal(lhs.x, rhs.x);
 }
 
 template <class RawType>
 bool compareEqImpl(const RawType& lhs, const RawType& rhs, dimension2)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_equal(lhs.x, rhs.x) &&
-           predicate<ValueType, ComponentTag>::is_equal(lhs.y, rhs.y);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_equal(lhs.x, rhs.x) &&
+           predicate<ComponentBase, ComponentTag>::is_equal(lhs.y, rhs.y);
 }
 
 template <class RawType>
 bool compareEqImpl(const RawType& lhs, const RawType& rhs, dimension3)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_equal(lhs.x, rhs.x) &&
-           predicate<ValueType, ComponentTag>::is_equal(lhs.y, rhs.y) &&
-           predicate<ValueType, ComponentTag>::is_equal(lhs.z, rhs.z);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_equal(lhs.x, rhs.x) &&
+           predicate<ComponentBase, ComponentTag>::is_equal(lhs.y, rhs.y) &&
+           predicate<ComponentBase, ComponentTag>::is_equal(lhs.z, rhs.z);
 }
 
 template <class RawType>
 bool compareEqImpl(const RawType& lhs, const RawType& rhs, dimension4)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_equal(lhs.x, rhs.x) &&
-           predicate<ValueType, ComponentTag>::is_equal(lhs.y, rhs.y) &&
-           predicate<ValueType, ComponentTag>::is_equal(lhs.z, rhs.z) &&
-           predicate<ValueType, ComponentTag>::is_equal(lhs.w, rhs.w);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_equal(lhs.x, rhs.x) &&
+           predicate<ComponentBase, ComponentTag>::is_equal(lhs.y, rhs.y) &&
+           predicate<ComponentBase, ComponentTag>::is_equal(lhs.z, rhs.z) &&
+           predicate<ComponentBase, ComponentTag>::is_equal(lhs.w, rhs.w);
 }
 } // namespace
 
@@ -85,47 +85,47 @@ namespace
 template <class RawType>
 bool compareNearImpl(const RawType& lhs, const RawType& rhs, const double abs_error, dimension0)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_near(lhs, rhs, abs_error);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_near(lhs, rhs, abs_error);
 }
 
 template <class RawType>
 bool compareNearImpl(const RawType& lhs, const RawType& rhs, const double abs_error, dimension1)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_near(lhs.x, rhs.x, abs_error);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_near(lhs.x, rhs.x, abs_error);
 }
 
 template <class RawType>
 bool compareNearImpl(const RawType& lhs, const RawType& rhs, const double abs_error, dimension2)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_near(lhs.x, rhs.x, abs_error) &&
-           predicate<ValueType, ComponentTag>::is_near(lhs.y, rhs.y, abs_error);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_near(lhs.x, rhs.x, abs_error) &&
+           predicate<ComponentBase, ComponentTag>::is_near(lhs.y, rhs.y, abs_error);
 }
 
 template <class RawType>
 bool compareNearImpl(const RawType& lhs, const RawType& rhs, const double abs_error, dimension3)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_near(lhs.x, rhs.x, abs_error) &&
-           predicate<ValueType, ComponentTag>::is_near(lhs.y, rhs.y, abs_error) &&
-           predicate<ValueType, ComponentTag>::is_near(lhs.z, rhs.z, abs_error);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_near(lhs.x, rhs.x, abs_error) &&
+           predicate<ComponentBase, ComponentTag>::is_near(lhs.y, rhs.y, abs_error) &&
+           predicate<ComponentBase, ComponentTag>::is_near(lhs.z, rhs.z, abs_error);
 }
 
 template <class RawType>
 bool compareNearImpl(const RawType& lhs, const RawType& rhs, const double abs_error, dimension4)
 {
-    typedef typename vector_component<RawType>::type ComponentTag;
-    typedef typename vector_component<RawType>::value_type ValueType;
-    return predicate<ValueType, ComponentTag>::is_near(lhs.x, rhs.x, abs_error) &&
-           predicate<ValueType, ComponentTag>::is_near(lhs.y, rhs.y, abs_error) &&
-           predicate<ValueType, ComponentTag>::is_near(lhs.z, rhs.z, abs_error) &&
-           predicate<ValueType, ComponentTag>::is_near(lhs.w, rhs.w, abs_error);
+    typedef typename vector_component_tag<RawType>::type ComponentTag;
+    typedef typename vector_component_base<RawType>::type ComponentBase;
+    return predicate<ComponentBase, ComponentTag>::is_near(lhs.x, rhs.x, abs_error) &&
+           predicate<ComponentBase, ComponentTag>::is_near(lhs.y, rhs.y, abs_error) &&
+           predicate<ComponentBase, ComponentTag>::is_near(lhs.z, rhs.z, abs_error) &&
+           predicate<ComponentBase, ComponentTag>::is_near(lhs.w, rhs.w, abs_error);
 }
 } // namespace
 
