@@ -1,5 +1,6 @@
 #include <gcuda/gcuda.h>
 #include <thrust/host_vector.h>
+#include <thrust/device_vector.h>
 
 template <typename T>
 __global__ void incrementKernel(T* data, int size)
@@ -39,15 +40,13 @@ TEST(AssertDeviceArrayEqual, Int)
         a[i] = i;
         ref[i] = i + 1;
     }
-    T* b;
-    cudaMalloc((void**)&b, sizeof(T) * numElements);
-    cudaMemcpy(b, a.data(), sizeof(T) * numElements, cudaMemcpyHostToDevice);
+    thrust::device_vector<T> b = a;
+    T* b_ptr = thrust::raw_pointer_cast(&b[0]);
     int threads = 128;
     int blocks = (numElements + threads - 1)/threads;
-    incrementKernel<T><<<blocks, threads>>>(b, numElements);
-    //ref[4] = 12;
-    ASSERT_DEVICE_ARRAY_EQ(ref, b, numElements);
-    cudaFree(b);
+    incrementKernel<T><<<blocks, threads>>>(b_ptr, numElements);
+    //ref[4] = 7876;
+    ASSERT_DEVICE_ARRAY_EQ(ref, b_ptr, numElements);
 }
 
 TEST(AssertDeviceArrayEqual, Float)
@@ -61,14 +60,12 @@ TEST(AssertDeviceArrayEqual, Float)
         a[i] = i;
         ref[i] = i + 1;
     }
-    T* b;
-    cudaMalloc((void**)&b, sizeof(T) * numElements);
-    cudaMemcpy(b, a.data(), sizeof(T) * numElements, cudaMemcpyHostToDevice);
+    thrust::device_vector<T> b = a;
+    T* b_ptr = thrust::raw_pointer_cast(&b[0]);
     int threads = 128;
     int blocks = (numElements + threads - 1)/threads;
-    incrementKernel<T><<<blocks, threads>>>(b, numElements);
-    ASSERT_DEVICE_ARRAY_EQ(ref.data(), b, numElements);
-    cudaFree(b);
+    incrementKernel<T><<<blocks, threads>>>(b_ptr, numElements);
+    ASSERT_DEVICE_ARRAY_EQ(ref.data(), b_ptr, numElements);
 }
 
 
@@ -89,15 +86,13 @@ TEST(AssertDeviceArrayNear, Float)
         a[i] = i;
         ref[i] = i + error;
     }
-    T* b;
-    cudaMalloc((void**)&b, sizeof(T) * numElements);
-    cudaMemcpy(b, a.data(), sizeof(T) * numElements, cudaMemcpyHostToDevice);
+    thrust::device_vector<T> b = a;
+    T* b_ptr = thrust::raw_pointer_cast(&b[0]);
     int threads = 128;
     int blocks = (numElements + threads - 1)/threads;
-    incrementWithErrorKernel<T><<<blocks, threads>>>(b, numElements, error);
+    incrementWithErrorKernel<T><<<blocks, threads>>>(b_ptr, numElements, error);
     const double absError = error * 1.1;
-    ASSERT_DEVICE_ARRAY_NEAR(ref, b, numElements, absError);
-    cudaFree(b);
+    ASSERT_DEVICE_ARRAY_NEAR(ref, b_ptr, numElements, absError);
 }
 
 TEST(AssertDeviceArrayNear, Double)
@@ -112,15 +107,13 @@ TEST(AssertDeviceArrayNear, Double)
         a[i] = i;
         ref[i] = i + error;
     }
-    T* b;
-    cudaMalloc((void**)&b, sizeof(T) * numElements);
-    cudaMemcpy(b, a.data(), sizeof(T) * numElements, cudaMemcpyHostToDevice);
+    thrust::device_vector<T> b = a;
+    T* b_ptr = thrust::raw_pointer_cast(&b[0]);
     int threads = 128;
     int blocks = (numElements + threads - 1)/threads;
-    incrementWithErrorKernel<T><<<blocks, threads>>>(b, numElements, error);
+    incrementWithErrorKernel<T><<<blocks, threads>>>(b_ptr, numElements, error);
     const double absError = error * 1.01;
-    ASSERT_DEVICE_ARRAY_NEAR(ref.data(), b, numElements, absError);
-    cudaFree(b);
+    ASSERT_DEVICE_ARRAY_NEAR(ref.data(), b_ptr, numElements, absError);
 }
 
 
