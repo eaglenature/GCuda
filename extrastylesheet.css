@@ -2,9 +2,19 @@
 * General
 *****************************************************************************/
 
-body, table, div, p, dl 
+body, div, p, dl 
 {
     font: 13px/22px arial,sans-serif;
+}
+
+table 
+{
+    font: 11px/20px arial,sans-serif;
+}
+
+td
+{
+    width: 370px;
 }
 
 body 
@@ -20,10 +30,12 @@ body
 
 div.contents 
 {
-    width: auto;
-    /*width: 1024px;*/
-    margin-left: 20px;
-    margin-right: 20px;
+    /*width: auto;*/
+    width: 1240px;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 10px;
     padding-left: 60px;
     padding-right: 60px;
@@ -45,10 +57,12 @@ div.textblock p:first-of-type
 
 div.header 
 {
-    width: auto;
-    /*width: 1024px;*/
-    margin-left: 20px;
-    margin-right: 20px;
+    /*width: auto;*/
+    width: 1240px;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin-left: auto;
+    margin-right: auto; 
     margin-top: 10px;
     padding-left: 60px;
     padding-right: 60px;
@@ -60,10 +74,12 @@ div.header
 
 #top 
 {
-    width: auto;
-    /*width: 1144px;*/
-    margin-left: 20px;
-    margin-right: 20px;
+    /*width: auto;*/
+    width: 1360px;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #MSearchBox 
@@ -76,10 +92,12 @@ div.header
 
 address.footer 
 {
-    width: auto;
-    /*width: 880px;*/
-    margin-left: 20px;
-    margin-right: 20px;
+    /*width: auto;*/
+    width: 1360px;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -298,7 +316,7 @@ table.memname tbody tr td.paramtype
 table.memname tbody tr td.memname 
 {
     position: absolute;
-    width: 1024px;
+    width: 1240px;
     /*width: 760px;*/
 }
 
@@ -343,7 +361,7 @@ td.entry
 /******************************************************************************
 * Code syntax highlighting
 *****************************************************************************/
-
+/*
 div.line 
 {
     line-height: normal;
@@ -379,8 +397,48 @@ div.fragment
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
     border-style: dashed;
 }
+*/
+div.line 
+{
+    line-height: normal;
+    font-size: 11px;
+}
 
+span.comment 
+{
+    color: #0D82AE;
+}
 
+span.preprocessor
+{
+    color: #CEDE66;
+    font-weight: bold;
+}
+
+span.keyword, span.keywordflow, span.keywordtype 
+{
+    color: #CFFF9F;
+    font-weight: bold;
+}
+
+a.code, a.code:visited 
+{
+    color: #4665A2;
+    font-weight: bold;
+}
+
+div.fragment 
+{
+    color: #DFDFDF;
+    border-color: #AAA;
+    padding: 14px 14px 14px 14px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #0E3B65;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    border-style: dashed;
+}
 
 
 /******************************************************************************
