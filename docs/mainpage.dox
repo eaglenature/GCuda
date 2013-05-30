@@ -102,7 +102,7 @@
  * <tr> <td><b>ASSERT_HOST_VECTOR_EQ(expected, actual);</b></td> <td><b>EXPECT_HOST_VECTOR_EQ(expected, actual);</b></td> <td><b>expected == actual (element wise)</b></td> </tr>
  * <tr> <td><b>ASSERT_HOST_VECTOR_NEAR(expected, actual, abs_error);</b></td> <td><b>EXPECT_HOST_VECTOR_NEAR(expected, actual, abs_error);</b></td> <td><b>the element wise difference doesn't exceed the given absolute error</b></td> </tr> 
  * <tr> <td><b>ASSERT_HOST_ARRAY_EQ(expected, actual, count);</b></td> <td><b>EXPECT_HOST_ARRAY_EQ(expected, actual, count);</b></td> <td><b>expected == actual (element wise)</b></td> </tr>
- * <tr> <td><b>ASSERT_HOST_ARRAY_NEAR(expected, actual, count, abs_error);  </b></td> <td><b>EXPECT_HOST_ARRAY_NEAR(expected, actual, count, abs_error);</b></td> <td><b>the element wise difference doesn't exceed the given absolute error</b></td> </tr> 
+ * <tr> <td><b>ASSERT_HOST_ARRAY_NEAR(expected, actual, count, abs_error);</b></td> <td><b>EXPECT_HOST_ARRAY_NEAR(expected, actual, count, abs_error);</b></td> <td><b>the element wise difference doesn't exceed the given absolute error</b></td> </tr> 
  * </table> 
  *
  *
