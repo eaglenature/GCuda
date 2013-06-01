@@ -65,7 +65,7 @@
  *     }
  *
  *     // Copy keys to device
- *     thrust::device_vector<T> d_keys = h_keys;
+ *     thrust::device_vector<uint> d_keys = h_keys;
  *
  *     // Sort on host
  *     std::sort(h_keys.begin(), h_keys.end());
